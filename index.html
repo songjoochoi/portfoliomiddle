@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Songjoo Choi Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#0b0b0d;--fg:#f3f1ec;--mut:#8d8b87;--line:#26262a;--card:#141417;--a:#ff5a5f;--a2:#8f7bff;
+--sans:'Space Grotesk','Noto Sans KR',system-ui,sans-serif;--kr:'Noto Sans KR','Space Grotesk',system-ui,sans-serif;color-scheme:dark}
+:root[data-lang=ja]{--kr:'Noto Sans JP','Noto Sans KR','Space Grotesk',system-ui,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--kr);font-size:16px;line-height:1.6;
+padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1440px;margin:0 auto}
+video{display:block;width:100%;height:100%;object-fit:cover;background:#111}
+/* top bar */
+.bar{position:fixed;top:env(safe-area-inset-top,0px);left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));z-index:20;display:flex;justify-content:space-between;align-items:center;padding:14px 0;font:500 13px var(--sans);letter-spacing:.04em;mix-blend-mode:difference;color:#fff}
+.bar nav{display:flex;gap:22px}
+.bar .loc{display:flex;gap:10px}
+.lang{display:flex;gap:2px;margin-left:6px}.lang button{font:500 13px var(--sans);letter-spacing:.04em;background:none;border:0;color:#fff;opacity:.5;cursor:pointer;padding:0 6px}.lang button[aria-pressed=true]{opacity:1;text-decoration:underline;text-underline-offset:4px}
+/* hero */
+.hero{position:relative;height:100vh;min-height:560px;margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));overflow:hidden}
+.hero video{position:absolute;inset:0;opacity:.85}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,13,.35),rgba(11,11,13,0) 40%,rgba(11,11,13,.85))}
+.hero h1{position:absolute;z-index:2;left:max(16px,env(safe-area-inset-left,0px));right:16px;bottom:9vh;margin:0;font:700 clamp(46px,11vw,190px)/.92 var(--sans);letter-spacing:-.045em;text-transform:uppercase;
+background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{position:absolute;z-index:2;left:max(16px,env(safe-area-inset-left,0px));bottom:3.5vh;font:400 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#d8d5cf}
+.hero .scroll{position:absolute;z-index:2;right:max(16px,env(safe-area-inset-right,0px));bottom:3.5vh;font:400 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#d8d5cf}
+/* statement */
+.state{padding-block:16vh 12vh;font:700 clamp(34px,8.2vw,132px)/1.05 var(--sans);letter-spacing:-.04em;text-transform:uppercase}
+.state .kr{font-family:var(--kr);font-weight:700;letter-spacing:-.05em;text-transform:none}
+.state span.dim{color:#4a4a4f}
+.strip{display:inline-block;vertical-align:middle;height:.78em;border-radius:999px;overflow:hidden;margin:0 .08em;position:relative;top:-.04em}
+.strip.s1{width:2.1em}.strip.s2{width:1.5em}.strip.s3{width:2.4em}
+.strip video{width:100%;height:100%}
+.glyph{display:inline-block;color:var(--a);font-weight:400}
+.state p{margin:6vh 0 0;max-width:620px;font:300 clamp(15px,1.4vw,19px)/1.7 var(--kr);letter-spacing:0;text-transform:none;color:var(--mut)}
+/* work */
+.head{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:18px;margin-bottom:5vh;font:500 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.works{display:grid;gap:clamp(48px,8vw,110px);padding-bottom:14vh}
+.w{display:grid;grid-template-columns:repeat(12,1fr);gap:16px 24px;align-items:end}
+.w .m{grid-column:1/9;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:var(--card);position:relative}
+.w:nth-child(even) .m{grid-column:5/13;grid-row:1}
+.w .t{grid-column:9/13;min-width:0}
+.w:nth-child(even) .t{grid-column:1/5;grid-row:1}
+.no{font:500 13px var(--sans);color:var(--a);letter-spacing:.08em}
+.w h3{margin:6px 0 4px;font:700 clamp(28px,3.6vw,52px)/1.05 var(--sans);letter-spacing:-.035em}
+.w .ko{margin:0 0 14px;color:var(--mut);font-size:15px}
+.w p{margin:0 0 14px;font-size:15px;color:#cfccc6;max-width:46ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags i{font:400 12px var(--sans);font-style:normal;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--mut)}
+.ph{position:absolute;inset:0;display:flex;align-items:flex-end;padding:22px;font:700 clamp(30px,5vw,72px)/1 var(--sans);letter-spacing:-.04em;color:rgba(255,255,255,.9)}
+.ph.p1{background:radial-gradient(120% 140% at 20% 0%,#3b2a7a,#0f0f14 60%)}
+.ph.p2{background:radial-gradient(120% 140% at 80% 0%,#6b3a1f,#0f0f14 62%)}
+.ph small{position:absolute;top:20px;left:22px;font:400 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+/* info */
+.info{border-top:1px solid var(--line);padding-block:7vh 14vh;display:grid;grid-template-columns:repeat(12,1fr);gap:48px 24px}
+.info .big{grid-column:1/8;margin:0;font:500 clamp(24px,3.4vw,46px)/1.2 var(--kr);letter-spacing:-.04em}
+.info .big em{font-style:normal;color:var(--a)}
+.info .cols{grid-column:8/13;display:grid;gap:34px;min-width:0}
+.info h4,.foot h4{margin:0 0 10px;font:500 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{border:1px solid #34343a;border-radius:999px;padding:6px 14px;font:400 14px var(--sans)}
+.info ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:15px;color:#cfccc6}
+.diff{grid-column:1/13;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.diff div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.diff b{display:block;font:700 13px var(--sans);color:var(--a);margin-bottom:8px}
+.diff p{margin:0;font-size:15px;color:#cfccc6}
+/* footer */
+.foot{border-top:1px solid var(--line);padding-top:7vh}
+.logo{margin:0 0 7vh;font:700 clamp(54px,15.5vw,260px)/.85 var(--sans);letter-spacing:-.06em;text-transform:uppercase}
+.fcols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding-bottom:7vh}
+.fcols a,.fcols span{display:block;font-size:17px}
+.fcols a:hover{color:var(--a)}
+.all{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-block:20px;font:500 14px var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.mq{margin:0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));overflow:hidden;border-top:1px solid var(--line);padding-block:14px;white-space:nowrap}
+.mq div{display:inline-block;animation:mq 28s linear infinite;font:500 13px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.mq b{color:var(--a);font-weight:400;margin:0 18px}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(max-width:820px){
+.w .m,.w:nth-child(even) .m{grid-column:1/13;grid-row:auto}
+.w .t,.w:nth-child(even) .t{grid-column:1/13;grid-row:auto}
+.info .big,.info .cols{grid-column:1/13}
+.diff{grid-template-columns:1fr}
+.fcols{grid-template-columns:1fr 1fr}
+.bar .loc span:last-child{display:none}
+}
+@media(prefers-reduced-motion:reduce){.mq div{animation:none}}
+</style>
+
+<style>html{padding:0}body{margin:0}</style>
+</head>
+<body>
+<div class="bar">
+  <div class="loc"><span>Seoul, KR</span><span id="clk">--:--:--</span></div>
+  <nav><a href="#work">Work</a><a href="#info">Info</a><span class="lang"><button type="button" data-l="ko">KR</button><button type="button" data-l="ja">JP</button></span></nav>
+</div>
+
+<section class="hero">
+  <video src="assets/beyond.mp4" autoplay muted loop playsinline preload="auto"></video>
+  <h1>Songjoo<br>Choi</h1>
+  <div class="sub">Creative Technologist</div>
+  <div class="scroll">Scroll for more ↓</div>
+</section>
+
+<div class="wrap">
+<section class="state">
+  <span class="kr"><span data-ko="경험의 구조를" data-ja="経験の構造を">경험의 구조를</span></span> <span class="strip s1"><video src="assets/garden.mp4" autoplay muted loop playsinline></video></span><br>
+  <span class="kr"><span data-ko="그리고," data-ja="描き、">그리고,</span></span> <span class="glyph">✺</span> <span class="strip s2"><video src="assets/drift.mp4" autoplay muted loop playsinline></video></span> <span class="kr dim"><span data-ko="기술로" data-ja="技術で">기술로</span></span><br>
+  <span class="kr"><span data-ko="움직이게" data-ja="動かし">움직이게</span></span> <span class="strip s3"><video src="assets/beyond.mp4" autoplay muted loop playsinline></video></span> <span class="kr"><span data-ko="합니다." data-ja="ます。">합니다.</span></span>
+  <p><span data-ko="디지털미디어디자인을 전공하며 인터랙티브 전시, 제너레이티브 미디어아트, 웹 경험을 만듭니다. 구조를 설계하는 일과 직접 구현하는 일을 한 사람이 이어가는 것이 제 방식입니다." data-ja="デジタルメディアデザインを専攻し、インタラクティブ展示、ジェネレーティブ・メディアアート、ウェブ体験をつくっています。構造を設計することと、自分の手で実装することを一人でつなげるのが私のやり方です。">디지털미디어디자인을 전공하며 인터랙티브 전시, 제너레이티브 미디어아트, 웹 경험을 만듭니다. 구조를 설계하는 일과 직접 구현하는 일을 한 사람이 이어가는 것이 제 방식입니다.</span></p>
+</section>
+
+<section id="work">
+  <div class="head"><span>Selected Works</span><span>05 Projects</span></div>
+  <div class="works">
+
+    <article class="w">
+      <div class="m"><img src="assets/malmoi.jpg" alt="말모이 — 그많은 말들은 어디로 갔을까?" style="width:100%;height:100%;object-fit:contain;background:#000;display:block"></div>
+      <div class="t"><div class="no">01</div><h3>Malmoi</h3><div class="ko" data-ko="말모이" data-ja="マルモイ">말모이</div>
+        <p data-ko="웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%." data-ja="ウェブカメラの手認識と人差し指ポインターで楽しむインタラクティブ展示。WebとTouchDesignerの役割を分け、3Dスキャンのツリーファイルを軽量化してリアルタイム動作の問題を解決しました。参加度は約65%。">웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%.</p>
+        <div class="tags"><i>Experience Design</i><i>Interaction Design</i><i>Creative Coding</i><i>Prototyping</i></div></div>
+    </article>
+
+    <article class="w">
+      <div class="m"><video src="assets/garden.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+      <div class="t"><div class="no">02</div><h3>Organic Garden</h3><div class="ko" data-ko="유기체 정원" data-ja="有機体の庭">유기체 정원</div>
+        <p data-ko="호텔 외벽 LED 미디어 파사드를 가정한 가상 제너레이티브 아트. 정원이 건물의 표면에서 숨 쉬듯 자라나는 장면을 그렸습니다." data-ja="ホテルの外壁LEDメディアファサードを想定した架空のジェネレーティブアート。庭が建物の表面で呼吸するように育っていく情景を描きました。">호텔 외벽 LED 미디어 파사드를 가정한 가상 제너레이티브 아트. 정원이 건물의 표면에서 숨 쉬듯 자라나는 장면을 그렸습니다.</p>
+        <div class="tags"><i>Generative Art</i><i>Media Façade</i></div></div>
+    </article>
+
+    <article class="w">
+      <div class="m"><video src="assets/drift.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+      <div class="t"><div class="no">03</div><h3>Drifting Ecosystem</h3><div class="ko" data-ko="유영하는 생태" data-ja="泳ぐ生態系">유영하는 생태</div>
+        <p data-ko="공항 미디어월을 가정한 제너레이티브 미디어아트. 이동 중인 사람들 앞에서 떠다니는 생태계가 시선을 천천히 붙잡습니다." data-ja="空港のメディアウォールを想定したジェネレーティブ・メディアアート。移動中の人々の前を漂う生態系が、視線をゆっくりと捉えます。">공항 미디어월을 가정한 제너레이티브 미디어아트. 이동 중인 사람들 앞에서 떠다니는 생태계가 시선을 천천히 붙잡습니다.</p>
+        <div class="tags"><i>Generative Art</i><i>Media Wall</i></div></div>
+    </article>
+
+    <article class="w">
+      <div class="m"><video src="assets/beyond.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+      <div class="t"><div class="no">04</div><h3>Beyond the Light</h3><div class="ko" data-ko="빛의너머 · 가상 프로젝트" data-ja="光のむこう · 架空プロジェクト">빛의너머 · 가상 프로젝트</div>
+        <p data-ko="빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다." data-ja="光を現実と非現実の境界として解釈した実験的モーションメディアアート。光へ向かって進入するカメラと、有機的に動く植物を重ねました。">빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다.</p>
+        <div class="tags"><i>Motion</i><i>Media Art</i><i>Experimental</i></div></div>
+    </article>
+
+    <article class="w">
+      <div class="m"><div class="ph p2"><small>In progress · 2026.10</small>DAWOON</div></div>
+      <div class="t"><div class="no">05</div><h3>DAWOON</h3><div class="ko" data-ko="다운 · 가상 브랜드 프로젝트" data-ja="DAWOON · 架空ブランドプロジェクト">다운 · 가상 브랜드 프로젝트</div>
+        <p data-ko="티 블렌드를 탐색하는 단일 페이지 인터랙티브 웹 경험. 진행 중입니다." data-ja="ティーブレンドを探索するシングルページのインタラクティブWeb体験。制作中です。">티 블렌드를 탐색하는 단일 페이지 인터랙티브 웹 경험. 진행 중입니다.</p>
+        <div class="tags"><i>Web</i><i>Brand</i><i>Interactive</i></div></div>
+    </article>
+
+  </div>
+</section>
+
+<section id="info" class="info">
+  <p class="big" data-ko="경험을 <em>설계</em>하는 것에서 멈추지 않고, 그것이 실제로 <em>움직이는 것</em>까지 만듭니다." data-ja="経験を<em>設計</em>するだけで終わらず、それが実際に<em>動くところ</em>までつくります。">경험을 <em>설계</em>하는 것에서 멈추지 않고, 그것이 실제로 <em>움직이는 것</em>까지 만듭니다.</p>
+  <div class="cols">
+    <div><h4>Tools &amp; Skills</h4><div class="chips"><span>HTML / CSS / JavaScript</span><span>TouchDesigner</span><span>Figma</span><span>Framer</span><span>Blender</span><span>Python</span></div></div>
+    <div><h4>Background</h4><ul>
+      <li data-ko="계원예술대학교 디지털미디어디자인학과 · 2027.02 졸업예정" data-ja="桂園芸術大学 デジタルメディアデザイン学科 · 2027年2月卒業予定">계원예술대학교 디지털미디어디자인학과 · 2027.02 졸업예정</li>
+      <li data-ko="학과 연합 PT 우수작 선정·발표 2회" data-ja="学科合同プレゼンテーション優秀作に選出・発表2回">학과 연합 PT 우수작 선정·발표 2회</li>
+      <li data-ko="학과 과대표 · 프로그래밍 세부전공 과대표" data-ja="学科代表 · プログラミング専攻代表">학과 과대표 · 프로그래밍 세부전공 과대표</li>
+      <li>JLPT N2 · HSK 3급</li></ul></div>
+  </div>
+  <div class="diff">
+    <div><b>01 — Creative Web</b><p data-ko="포트폴리오 자체를 인터랙티브한 웹 경험으로 설계합니다." data-ja="ポートフォリオ自体をインタラクティブなウェブ体験として設計します。">포트폴리오 자체를 인터랙티브한 웹 경험으로 설계합니다.</p></div>
+    <div><b>02 — Problem Solving</b><p data-ko="문제를 정의하고 해결해 나간 과정을 작업의 서사로 남깁니다." data-ja="課題を定義し、解決していった過程を作品の物語として残します。">문제를 정의하고 해결해 나간 과정을 작업의 서사로 남깁니다.</p></div>
+    <div><b>03 — Design × Code</b><p data-ko="경험 설계와 직접 구현을 함께 해냅니다." data-ja="体験設計と自らの実装を両立します。">경험 설계와 직접 구현을 함께 해냅니다.</p></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="logo">Songjoo<br>Choi</div>
+  <div class="fcols">
+    <div><h4>Connect</h4><a href="https://github.com/songjoochoi" target="_blank" rel="noopener">GitHub ↗</a><span id="mail" style="user-select:all">songjoo0531@naver.com</span></div>
+    <div><h4>Disciplines</h4><span>Interaction Design</span><span>Creative Coding</span><span>Generative Art</span><span>Web Experience</span></div>
+    <div><h4>Based in</h4><span>Seoul, KR</span></div>
+  </div>
+  <div class="all"><a href="#work">All Projects →</a><a href="#top" id="top">Back to top ↑</a></div>
+</footer>
+</div>
+
+<div class="mq"><div id="mqc"></div></div>
+
+<script>
+(function(){
+  var cur='ko';
+  function setLang(l){cur=l;document.documentElement.setAttribute('data-lang',l);document.documentElement.lang=l;
+    document.querySelectorAll('[data-ko]').forEach(function(e){e.innerHTML=e.getAttribute('data-'+l)});
+    document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-l')===l)});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-l'))})});
+  var saved='ko';try{saved=localStorage.getItem('lang')||'ko'}catch(e){}
+  setLang(saved==='ja'?'ja':'ko');
+  function clock(){try{document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Seoul',hour12:false})}catch(e){}}
+  clock();setInterval(clock,1000);
+  document.getElementById('top').addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
+  var t='Songjoo Choi<b>✺</b>Creative Technologist<b>✺</b>Experience Design<b>✺</b>Media Art<b>✺</b>';
+  document.getElementById('mqc').innerHTML=t+t+t+t;
+  var vs=document.querySelectorAll('video');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{rootMargin:'100px'});
+  vs.forEach(function(v){io.observe(v)})}
+})();
+</script>
+
+</body>
+</html>
