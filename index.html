@@ -1,9 +1,5 @@
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Songjoo Choi Portfolio</title>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><title>Songjoo Choi Portfolio</title>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap">
 <style>
 :root{--bg:#0b0b0d;--fg:#f3f1ec;--mut:#8d8b87;--line:#26262a;--card:#141417;--a:#ff5a5f;--a2:#8f7bff;
@@ -30,11 +26,12 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
 .hero .sub{position:absolute;z-index:2;left:max(16px,env(safe-area-inset-left,0px));bottom:3.5vh;font:400 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#d8d5cf}
 .hero .scroll{position:absolute;z-index:2;right:max(16px,env(safe-area-inset-right,0px));bottom:3.5vh;font:400 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#d8d5cf}
 /* statement */
-.state{padding-block:16vh 12vh;font:700 clamp(34px,8.2vw,132px)/1.05 var(--sans);letter-spacing:-.04em;text-transform:uppercase}
+.state{min-height:100vh;width:100vw;margin-left:calc(50% - 50vw);box-sizing:border-box;padding:24vh max(16px,env(safe-area-inset-right,0px)) 10vh max(16px,env(safe-area-inset-left,0px));font:700 clamp(34px,9.6vw,200px)/1.03 var(--sans);letter-spacing:-.045em;text-transform:uppercase}
+@media(max-width:600px){.state{font-size:8.8vw}}
 .state .kr{font-family:var(--kr);font-weight:700;letter-spacing:-.05em;text-transform:none}
 .state span.dim{color:#4a4a4f}
 .strip{display:inline-block;vertical-align:middle;height:.78em;border-radius:999px;overflow:hidden;margin:0 .08em;position:relative;top:-.04em}
-.strip.s1{width:2.1em}.strip.s2{width:1.5em}.strip.s3{width:2.4em}
+.strip.s1{width:1.9em}.strip.s2{width:1.4em}.strip.s3{width:2.1em}
 .strip video{width:100%;height:100%}
 .glyph{display:inline-block;color:var(--a);font-weight:400}
 .state p{margin:6vh 0 0;max-width:620px;font:300 clamp(15px,1.4vw,19px)/1.7 var(--kr);letter-spacing:0;text-transform:none;color:var(--mut)}
@@ -89,37 +86,46 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
 .bar .loc span:last-child{display:none}
 }
 @media(prefers-reduced-motion:reduce){.mq div{animation:none}}
+
+/* swipe carousel */
+.car{position:relative}
+.car .track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.car .track::-webkit-scrollbar{display:none}
+.car .sl{flex:0 0 100%;scroll-snap-align:start;height:100%;background:#111}
+.car .sl video,.car .sl img{width:100%;height:100%;object-fit:cover;display:block}
+.car .wip{position:absolute;left:14px;top:14px;z-index:2;font:700 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;background:var(--a);color:#fff;padding:5px 10px;border-radius:999px}
+.car .dots{position:absolute;left:0;right:0;bottom:12px;z-index:2;display:flex;justify-content:center;gap:7px}
+.car .dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);transition:.25s}
+.car .dots i.on{background:#fff;width:20px;border-radius:99px}
+.car .nav{position:absolute;top:50%;z-index:2;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.4);backdrop-filter:blur(6px);color:#fff;font:400 20px var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.car .nav.prev{left:12px}.car .nav.next{right:12px}
+.car .nav[disabled]{opacity:.25;cursor:default}
+.car .hint{position:absolute;right:14px;top:14px;z-index:2;font:500 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);padding:5px 10px;border-radius:999px;transition:opacity .4s}
+@media(hover:none){.car .nav{display:none}}
 </style>
 
-<style>html{padding:0}body{margin:0}</style>
-</head>
-<body>
 <div class="bar">
   <div class="loc"><span>Seoul, KR</span><span id="clk">--:--:--</span></div>
   <nav><a href="#work">Work</a><a href="#info">Info</a><span class="lang"><button type="button" data-l="ko">KR</button><button type="button" data-l="ja">JP</button></span></nav>
 </div>
-
-<section class="hero">
-  <video src="assets/beyond.mp4" autoplay muted loop playsinline preload="auto"></video>
-  <h1>Songjoo<br>Choi</h1>
-  <div class="sub">Creative Technologist</div>
-  <div class="scroll">Scroll for more ↓</div>
-</section>
 
 <div class="wrap">
 <section class="state">
   <span class="kr"><span data-ko="경험의 구조를" data-ja="経験の構造を">경험의 구조를</span></span> <span class="strip s1"><video src="assets/garden.mp4" autoplay muted loop playsinline></video></span><br>
   <span class="kr"><span data-ko="그리고," data-ja="描き、">그리고,</span></span> <span class="glyph">✺</span> <span class="strip s2"><video src="assets/drift.mp4" autoplay muted loop playsinline></video></span> <span class="kr dim"><span data-ko="기술로" data-ja="技術で">기술로</span></span><br>
   <span class="kr"><span data-ko="움직이게" data-ja="動かし">움직이게</span></span> <span class="strip s3"><video src="assets/beyond.mp4" autoplay muted loop playsinline></video></span> <span class="kr"><span data-ko="합니다." data-ja="ます。">합니다.</span></span>
-  <p><span data-ko="디지털미디어디자인을 전공하며 인터랙티브 전시, 제너레이티브 미디어아트, 웹 경험을 만듭니다. 구조를 설계하는 일과 직접 구현하는 일을 한 사람이 이어가는 것이 제 방식입니다." data-ja="デジタルメディアデザインを専攻し、インタラクティブ展示、ジェネレーティブ・メディアアート、ウェブ体験をつくっています。構造を設計することと、自分の手で実装することを一人でつなげるのが私のやり方です。">디지털미디어디자인을 전공하며 인터랙티브 전시, 제너레이티브 미디어아트, 웹 경험을 만듭니다. 구조를 설계하는 일과 직접 구현하는 일을 한 사람이 이어가는 것이 제 방식입니다.</span></p>
 </section>
+
+
+
+
 
 <section id="work">
   <div class="head"><span>Selected Works</span><span>05 Projects</span></div>
   <div class="works">
 
     <article class="w">
-      <div class="m"><img src="assets/malmoi.jpg" alt="말모이 — 그많은 말들은 어디로 갔을까?" style="width:100%;height:100%;object-fit:contain;background:#000;display:block"></div>
+      <div class="m"><img src="assets/malmoi.jpg" alt="말모이 — 그많은 말들은 어디로 갔을까?" style="width:100%;height:100%;object-fit:contain;background:#fcf9fc;display:block"></div>
       <div class="t"><div class="no">01</div><h3>Malmoi</h3><div class="ko" data-ko="말모이" data-ja="マルモイ">말모이</div>
         <p data-ko="웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%." data-ja="ウェブカメラの手認識と人差し指ポインターで楽しむインタラクティブ展示。WebとTouchDesignerの役割を分け、3Dスキャンのツリーファイルを軽量化してリアルタイム動作の問題を解決しました。参加度は約65%。">웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%.</p>
         <div class="tags"><i>Experience Design</i><i>Interaction Design</i><i>Creative Coding</i><i>Prototyping</i></div></div>
@@ -145,14 +151,12 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
         <p data-ko="빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다." data-ja="光を現実と非現実の境界として解釈した実験的モーションメディアアート。光へ向かって進入するカメラと、有機的に動く植物を重ねました。">빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다.</p>
         <div class="tags"><i>Motion</i><i>Media Art</i><i>Experimental</i></div></div>
     </article>
-
     <article class="w">
-      <div class="m"><div class="ph p2"><small>In progress · 2026.10</small>DAWOON</div></div>
-      <div class="t"><div class="no">05</div><h3>DAWOON</h3><div class="ko" data-ko="다운 · 가상 브랜드 프로젝트" data-ja="DAWOON · 架空ブランドプロジェクト">다운 · 가상 브랜드 프로젝트</div>
-        <p data-ko="티 블렌드를 탐색하는 단일 페이지 인터랙티브 웹 경험. 진행 중입니다." data-ja="ティーブレンドを探索するシングルページのインタラクティブWeb体験。制作中です。">티 블렌드를 탐색하는 단일 페이지 인터랙티브 웹 경험. 진행 중입니다.</p>
-        <div class="tags"><i>Web</i><i>Brand</i><i>Interactive</i></div></div>
+      <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl"><video src="assets/detroit.mp4" autoplay muted loop playsinline preload="metadata"></video></div><div class="sl"><img src="assets/detroit-capture.jpg" alt="Detroit: Become Human 작업 캡처" loading="lazy" style="object-fit:contain;background:#000"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
+      <div class="t"><div class="no">05</div><h3>Detroit: Become Human</h3><div class="ko" data-ko="개인 작업" data-ja="個人制作">개인 작업</div>
+        <p data-ko="게임 〈Detroit: Become Human〉에서 영감을 받은 개인 작업. 인간과 안드로이드 사이의 경계를 영상으로 풀어냈고, 3D 렌더링과 실시간 연동 작업으로 확장해 완성할 예정입니다." data-ja="ゲーム『Detroit: Become Human』から着想を得た個人制作。人間とアンドロイドの境界を映像で表現し、3Dレンダリングとリアルタイム連動へと発展させて完成させる予定です。">게임 〈Detroit: Become Human〉에서 영감을 받은 개인 작업. 인간과 안드로이드 사이의 경계를 영상으로 풀어냈고, 3D 렌더링과 실시간 연동 작업으로 확장해 완성할 예정입니다.</p>
+        <div class="tags"><i>Personal Project</i><i>Inspired by Game</i><i>Motion</i></div></div>
     </article>
-
   </div>
 </section>
 
@@ -176,7 +180,7 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
 <footer class="foot">
   <div class="logo">Songjoo<br>Choi</div>
   <div class="fcols">
-    <div><h4>Connect</h4><a href="https://github.com/songjoochoi" target="_blank" rel="noopener">GitHub ↗</a><span id="mail" style="user-select:all">songjoo0531@naver.com</span></div>
+    <div><h4>Connect</h4><a href="https://github.com/songjoochoi" target="_blank" rel="noopener">GitHub ↗</a><a href="https://songjoochoi.github.io/portfoliomiddle/assets/resume.pdf" target="_blank" rel="noopener" data-ko="이력서 ↗" data-ja="履歴書 ↗">이력서 ↗</a><a href="https://songjoochoi.github.io/portfoliomiddle/assets/statement.pdf" target="_blank" rel="noopener" data-ko="자기소개서 ↗" data-ja="自己紹介書 ↗">자기소개서 ↗</a><span id="mail" style="user-select:all">songjoo0531@naver.com</span></div>
     <div><h4>Disciplines</h4><span>Interaction Design</span><span>Creative Coding</span><span>Generative Art</span><span>Web Experience</span></div>
     <div><h4>Based in</h4><span>Seoul, KR</span></div>
   </div>
@@ -196,6 +200,22 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
   document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-l'))})});
   var saved='ko';try{saved=localStorage.getItem('lang')||'ko'}catch(e){}
   setLang(saved==='ja'?'ja':'ko');
+  (function(){var t='<span>Interaction</span><b>✺</b><i>Creative Coding</i><b>✺</b><span>Generative Art</span><b>✺</b><i>Experience Design</i><b>✺</b>';var e=document.getElementById('tkc');if(e)e.innerHTML=t+t+t+t;
+  document.querySelectorAll('.strip').forEach(function(s){s.addEventListener('animationend',function(ev){if(ev.target===s)s.classList.add('done')})});
+  var hero=document.getElementById('start');
+  if(hero&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){hero.addEventListener('mousemove',function(ev){var x=(ev.clientX/innerWidth-.5),y=(ev.clientY/innerHeight-.5);
+    hero.querySelectorAll('.aura').forEach(function(a,i){var k=(i+1)*26;a.style.translate=(-x*k)+'px '+(-y*k)+'px'});
+    var h=hero.querySelector('.hin');h.style.transform='translate('+(x*-14)+'px,'+(y*-8)+'px)'});}})();
+  (function(){document.querySelectorAll('.car').forEach(function(c){var tr=c.querySelector('.track'),sl=tr.children,n=sl.length,d=c.querySelector('.dots'),pv=c.querySelector('.prev'),nx=c.querySelector('.next'),h=c.querySelector('.hint');
+    for(var i=0;i<n;i++){d.appendChild(document.createElement('i'))}
+    function idx(){return Math.round(tr.scrollLeft/tr.clientWidth)}
+    function upd(){var k=idx();[].forEach.call(d.children,function(e,j){e.className=j===k?'on':''});pv.disabled=k===0;nx.disabled=k===n-1;if(k>0&&h)h.style.opacity=0}
+    function go(k){tr.scrollTo({left:Math.max(0,Math.min(n-1,k))*tr.clientWidth,behavior:'smooth'})}
+    tr.addEventListener('scroll',upd,{passive:true});pv.addEventListener('click',function(){go(idx()-1)});nx.addEventListener('click',function(){go(idx()+1)});upd();
+    var dn=false,sx=0,sl0=0;tr.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'){dn=true;sx=e.clientX;sl0=tr.scrollLeft;tr.style.scrollSnapType='none'}});
+    addEventListener('pointermove',function(e){if(dn)tr.scrollLeft=sl0-(e.clientX-sx)});
+    addEventListener('pointerup',function(){if(dn){dn=false;tr.style.scrollSnapType='';go(idx())}});
+  })})();
   function clock(){try{document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Seoul',hour12:false})}catch(e){}}
   clock();setInterval(clock,1000);
   document.getElementById('top').addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
@@ -206,6 +226,4 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
   vs.forEach(function(v){io.observe(v)})}
 })();
 </script>
-
-</body>
-</html>
+</body></html>
