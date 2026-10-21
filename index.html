@@ -102,8 +102,40 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
 .car .nav[disabled]{opacity:.25;cursor:default}
 .car .hint{position:absolute;right:14px;top:14px;z-index:2;font:500 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.45);padding:5px 10px;border-radius:999px;transition:opacity .4s}
 @media(hover:none){.car .nav{display:none}}
+
+/* intro + headline motion */
+.intro{position:fixed;inset:0;z-index:100;background:#0b0b0d;color:#f3f1ec;display:flex;flex-direction:column;justify-content:space-between;padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));box-sizing:border-box;transition:transform .9s cubic-bezier(.76,0,.24,1);animation:introKill 0s 5s forwards}
+.intro .it{display:flex;justify-content:space-between;font:500 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#8d8b87}
+.intro .ib{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.intro .nm{font:700 clamp(28px,5vw,72px)/1 var(--sans);letter-spacing:-.04em}
+.intro .nm i{font-style:normal;color:var(--a)}
+.intro .ct{font:700 clamp(64px,16vw,260px)/.85 var(--sans);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.intro .bar2{position:absolute;left:0;bottom:0;height:3px;width:0;background:var(--a);transition:width .12s linear}
+.intro.out{transform:translateY(-100%)}
+.intro.gone{display:none}
+@keyframes introKill{to{visibility:hidden;pointer-events:none}}
+html.intro-on{overflow:hidden}
+.state .ln{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}
+.js .state .ln>.li{display:block;transform:translateY(110%);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.js.go .state .ln>.li{transform:none}
+.js.go .state .ln:nth-of-type(2)>.li{transition-delay:.12s}
+.js.go .state .ln:nth-of-type(3)>.li{transition-delay:.24s}
+.js .state p{opacity:0;transition:opacity 1s .6s}
+.js.go .state p{opacity:1}
+@media(prefers-reduced-motion:reduce){.intro{display:none}.js .state .ln>.li{transform:none;transition:none}.js .state p{opacity:1}}
+
+/* hover preview + cursor */
+.w{scroll-margin-top:72px}
+.car .sl{overflow:hidden}
+.w .m>video,.w .m .sl img,.w .m .sl video{transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+@media(hover:hover) and (pointer:fine){
+.w .m:hover>video,.w .m:hover .sl img,.w .m:hover .sl video{transform:scale(1.035)}
+.w .m{transition:border-radius .5s}.w .m:hover{border-radius:28px}
+}
 </style>
 
+<div class="intro" id="intro" aria-hidden="true"><div class="it"><span>Portfolio 2027</span><span>Seoul, KR</span></div><div class="ib"><div class="nm">Songjoo Choi</div><div class="ct" id="ict">000</div></div><div class="bar2" id="ib2"></div></div>
+<script>document.documentElement.classList.add("js");if(!matchMedia("(prefers-reduced-motion:reduce)").matches)document.documentElement.classList.add("intro-on")</script>
 <div class="bar">
   <div class="loc"><span>Seoul, KR</span><span id="clk">--:--:--</span></div>
   <nav><a href="#work">Work</a><a href="#info">Info</a><span class="lang"><button type="button" data-l="ko">KR</button><button type="button" data-l="ja">JP</button></span></nav>
@@ -111,9 +143,9 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
 
 <div class="wrap">
 <section class="state">
-  <span class="kr"><span data-ko="경험의 구조를" data-ja="経験の構造を">경험의 구조를</span></span> <span class="strip s1"><video src="assets/garden.mp4" autoplay muted loop playsinline></video></span><br>
-  <span class="kr"><span data-ko="그리고," data-ja="描き、">그리고,</span></span> <span class="glyph">✺</span> <span class="strip s2"><video src="assets/drift.mp4" autoplay muted loop playsinline></video></span> <span class="kr dim"><span data-ko="기술로" data-ja="技術で">기술로</span></span><br>
-  <span class="kr"><span data-ko="움직이게" data-ja="動かし">움직이게</span></span> <span class="strip s3"><video src="assets/beyond.mp4" autoplay muted loop playsinline></video></span> <span class="kr"><span data-ko="합니다." data-ja="ます。">합니다.</span></span>
+  <span class="ln"><span class="li"><span class="kr"><span data-ko="경험의 구조를" data-ja="経験の構造を">경험의 구조를</span></span> <span class="strip s1"><video src="assets/garden.mp4" autoplay muted loop playsinline></video></span></span></span>
+  <span class="ln"><span class="li"><span class="kr"><span data-ko="그리고," data-ja="描き、">그리고,</span></span> <span class="glyph">✺</span> <span class="strip s2"><video src="assets/drift.mp4" autoplay muted loop playsinline></video></span> <span class="kr dim"><span data-ko="기술로" data-ja="技術で">기술로</span></span></span></span>
+  <span class="ln"><span class="li"><span class="kr"><span data-ko="움직이게" data-ja="動かし">움직이게</span></span> <span class="strip s3"><video src="assets/beyond.mp4" autoplay muted loop playsinline></video></span> <span class="kr"><span data-ko="합니다." data-ja="ます。">합니다.</span></span></span></span>
 </section>
 
 
@@ -124,34 +156,34 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
   <div class="head"><span>Selected Works</span><span>05 Projects</span></div>
   <div class="works">
 
-    <article class="w">
-      <div class="m"><img src="assets/malmoi.jpg" alt="말모이 — 그많은 말들은 어디로 갔을까?" style="width:100%;height:100%;object-fit:contain;background:#fcf9fc;display:block"></div>
+    <article class="w" id="malmoi">
+      <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl" style="background:#fcf9fc"><img src="assets/malmoi.jpg" alt="말모이 — 그많은 말들은 어디로 갔을까?" style="width:100%;height:100%;object-fit:contain;background:#fcf9fc;display:block"></div><div class="sl"><video src="assets/malmoi-play.mp4" autoplay muted loop playsinline preload="metadata" style="object-fit:contain;background:#0b0b0d"></video></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
       <div class="t"><div class="no">01</div><h3>Malmoi</h3><div class="ko" data-ko="말모이" data-ja="マルモイ">말모이</div>
         <p data-ko="웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%." data-ja="ウェブカメラの手認識と人差し指ポインターで楽しむインタラクティブ展示。WebとTouchDesignerの役割を分け、3Dスキャンのツリーファイルを軽量化してリアルタイム動作の問題を解決しました。参加度は約65%。">웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%.</p>
         <div class="tags"><i>Experience Design</i><i>Interaction Design</i><i>Creative Coding</i><i>Prototyping</i></div></div>
     </article>
 
-    <article class="w">
-      <div class="m"><video src="assets/garden.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+    <article class="w" id="garden">
+      <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl"><video src="assets/garden.mp4" autoplay muted loop playsinline preload="metadata"></video></div><div class="sl"><img src="assets/garden-still.jpg" alt="Organic Garden — 스틸 컷" loading="lazy"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
       <div class="t"><div class="no">02</div><h3>Organic Garden</h3><div class="ko" data-ko="유기체 정원" data-ja="有機体の庭">유기체 정원</div>
         <p data-ko="호텔 외벽 LED 미디어 파사드를 가정한 가상 제너레이티브 아트. 정원이 건물의 표면에서 숨 쉬듯 자라나는 장면을 그렸습니다." data-ja="ホテルの外壁LEDメディアファサードを想定した架空のジェネレーティブアート。庭が建物の表面で呼吸するように育っていく情景を描きました。">호텔 외벽 LED 미디어 파사드를 가정한 가상 제너레이티브 아트. 정원이 건물의 표면에서 숨 쉬듯 자라나는 장면을 그렸습니다.</p>
         <div class="tags"><i>Generative Art</i><i>Media Façade</i></div></div>
     </article>
 
-    <article class="w">
-      <div class="m"><video src="assets/drift.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
+    <article class="w" id="drift">
+      <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl"><video src="assets/drift.mp4" autoplay muted loop playsinline preload="metadata"></video></div><div class="sl"><img src="assets/drift-still.jpg" alt="Drifting Ecosystem — 스틸 컷" loading="lazy"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
       <div class="t"><div class="no">03</div><h3>Drifting Ecosystem</h3><div class="ko" data-ko="유영하는 생태" data-ja="泳ぐ生態系">유영하는 생태</div>
         <p data-ko="공항 미디어월을 가정한 제너레이티브 미디어아트. 이동 중인 사람들 앞에서 떠다니는 생태계가 시선을 천천히 붙잡습니다." data-ja="空港のメディアウォールを想定したジェネレーティブ・メディアアート。移動中の人々の前を漂う生態系が、視線をゆっくりと捉えます。">공항 미디어월을 가정한 제너레이티브 미디어아트. 이동 중인 사람들 앞에서 떠다니는 생태계가 시선을 천천히 붙잡습니다.</p>
         <div class="tags"><i>Generative Art</i><i>Media Wall</i></div></div>
     </article>
 
-    <article class="w">
+    <article class="w" id="beyond">
       <div class="m"><video src="assets/beyond.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
       <div class="t"><div class="no">04</div><h3>Beyond the Light</h3><div class="ko" data-ko="빛의너머 · 가상 프로젝트" data-ja="光のむこう · 架空プロジェクト">빛의너머 · 가상 프로젝트</div>
         <p data-ko="빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다." data-ja="光を現実と非現実の境界として解釈した実験的モーションメディアアート。光へ向かって進入するカメラと、有機的に動く植物を重ねました。">빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다.</p>
         <div class="tags"><i>Motion</i><i>Media Art</i><i>Experimental</i></div></div>
     </article>
-    <article class="w">
+    <article class="w" id="detroit">
       <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl"><video src="assets/detroit.mp4" autoplay muted loop playsinline preload="metadata"></video></div><div class="sl"><img src="assets/detroit-capture.jpg" alt="Detroit: Become Human 작업 캡처" loading="lazy" style="object-fit:contain;background:#000"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
       <div class="t"><div class="no">05</div><h3>Detroit: Become Human</h3><div class="ko" data-ko="개인 작업" data-ja="個人制作">개인 작업</div>
         <p data-ko="게임 〈Detroit: Become Human〉에서 영감을 받은 개인 작업. 인간과 안드로이드 사이의 경계를 영상으로 풀어냈고, 3D 렌더링과 실시간 연동 작업으로 확장해 완성할 예정입니다." data-ja="ゲーム『Detroit: Become Human』から着想を得た個人制作。人間とアンドロイドの境界を映像で表現し、3Dレンダリングとリアルタイム連動へと発展させて完成させる予定です。">게임 〈Detroit: Become Human〉에서 영감을 받은 개인 작업. 인간과 안드로이드 사이의 경계를 영상으로 풀어냈고, 3D 렌더링과 실시간 연동 작업으로 확장해 완성할 예정입니다.</p>
@@ -216,6 +248,21 @@ background:linear-gradient(95deg,#fff 10%,#ffb3c0 45%,#9d8bff 90%);-webkit-backg
     addEventListener('pointermove',function(e){if(dn)tr.scrollLeft=sl0-(e.clientX-sx)});
     addEventListener('pointerup',function(){if(dn){dn=false;tr.style.scrollSnapType='';go(idx())}});
   })})();
+  (function(){var d=document.documentElement,el=document.getElementById('intro'),c=document.getElementById('ict'),b=document.getElementById('ib2');
+    function done(){d.classList.add('go')}
+    if(!d.classList.contains('intro-on')){done();return}
+    var t0=performance.now(),D=1500;
+    (function tick(n){var p=Math.min(1,(n-t0)/D),e=1-Math.pow(1-p,2),v=Math.round(e*100);c.textContent=String(v).padStart(3,'0');b.style.width=v+'%';
+      if(p<1)requestAnimationFrame(tick);else{el.classList.add('out');d.classList.remove('intro-on');setTimeout(done,350);setTimeout(function(){el.classList.add('gone')},1100)}})(t0);
+  })();
+  (function(){if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+    document.querySelectorAll('.car').forEach(function(car){var tr=car.querySelector('.track'),n=tr.children.length,tm=null,down=false;
+      function step(){if(down)return;var k=Math.round(tr.scrollLeft/tr.clientWidth);tr.scrollTo({left:((k+1)%n)*tr.clientWidth,behavior:'smooth'})}
+      car.addEventListener('mouseenter',function(){tm=setTimeout(function(){step();tm=setInterval(step,1800)},900)});
+      car.addEventListener('mouseleave',function(){clearTimeout(tm);clearInterval(tm);tm=null;if(!down)tr.scrollTo({left:0,behavior:'smooth'})});
+      car.addEventListener('pointerdown',function(){down=true;clearTimeout(tm);clearInterval(tm)});
+      addEventListener('pointerup',function(){down=false})});
+  })();
   function clock(){try{document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Seoul',hour12:false})}catch(e){}}
   clock();setInterval(clock,1000);
   document.getElementById('top').addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
