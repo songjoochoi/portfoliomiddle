@@ -1,9 +1,11 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><title>Songjoo Choi Portfolio</title>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap">
 <style>
 :root{--bg:#0b0b0d;--fg:#f3f1ec;--mut:#8d8b87;--line:#26262a;--card:#141417;--a:#ff5a5f;--a2:#8f7bff;
 --sans:'Space Grotesk','Noto Sans KR',system-ui,sans-serif;--kr:'Noto Sans KR','Space Grotesk',system-ui,sans-serif;color-scheme:dark}
+:root[data-lang=en]{--kr:'Space Grotesk','Noto Sans KR',system-ui,sans-serif}
+:root[data-lang=zh]{--kr:'Noto Sans SC','Noto Sans KR','Space Grotesk',system-ui,sans-serif}
 :root[data-lang=ja]{--kr:'Noto Sans JP','Noto Sans KR','Space Grotesk',system-ui,sans-serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -132,20 +134,70 @@ html.intro-on{overflow:hidden}
 .w .m:hover>video,.w .m:hover .sl img,.w .m:hover .sl video{transform:scale(1.035)}
 .w .m{transition:border-radius .5s}.w .m:hover{border-radius:28px}
 }
+
+/* ===== detail overlay ===== */
+.more{margin-top:16px;display:inline-flex;gap:8px;align-items:center;font:500 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--fg);background:none;border:1px solid #34343a;border-radius:999px;padding:9px 18px;cursor:pointer;transition:.2s}
+.more:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.w h3{cursor:pointer}
+html.dt-open{overflow:hidden}
+.dt{position:fixed;inset:0;z-index:60;overflow-y:auto;overflow-x:hidden;background:var(--bg);opacity:0;visibility:hidden;transform:translateY(24px);transition:opacity .35s,transform .35s,visibility 0s .35s}
+.dt.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s,transform .35s}
+.dt-in{max-width:1440px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px))}
+.dt-top{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:14px 0;background:linear-gradient(var(--bg) 70%,transparent);font:500 13px var(--sans);letter-spacing:.06em;text-transform:uppercase}
+.dt-top button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:var(--fg);background:none;border:0;cursor:pointer;padding:6px 0}
+.dt-top button:hover{color:var(--a)}
+.dt-top .cnt{color:var(--mut)}
+.dt h2{margin:7vh 0 6px;font:700 clamp(40px,9vw,150px)/.95 var(--sans);letter-spacing:-.05em;text-wrap:balance}
+.dt .sub{margin:0 0 6vh;color:var(--mut);font-size:clamp(15px,1.4vw,19px)}
+.dt .no{display:block;margin-top:5vh}
+.dt-g{display:grid;grid-template-columns:repeat(12,1fr);gap:40px 24px;border-top:1px solid var(--line);padding-top:28px}
+.dt-meta{grid-column:1/5;margin:0;display:grid;gap:18px;align-content:start}
+.dt-meta div{border-bottom:1px solid var(--line);padding-bottom:14px}
+.dt-meta dt{font:500 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+.dt-meta dd{margin:0;font-size:16px;color:#e4e1db}
+.dt-body{grid-column:5/13;min-width:0}
+.dt-body .lead{margin:0 0 6vh;font:500 clamp(20px,2.3vw,32px)/1.4 var(--kr);letter-spacing:-.03em;text-wrap:pretty}
+.dt-body h4{margin:0 0 10px;font:500 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--a)}
+.dt-body .sec{margin:0 0 6vh;font-size:17px;color:#cfccc6;max-width:60ch}
+.dt-media{display:grid;gap:clamp(16px,2vw,28px);margin:8vh 0}
+.dt-media .dm{aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:var(--card)}
+.dt-media .dm>*{width:100%;height:100%;display:block}
+.dt-nav{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);margin-top:4vh}
+.dt-nav button{font:inherit;color:var(--fg);background:none;border:0;cursor:pointer;text-align:left;padding:5vh 0;display:grid;gap:6px}
+.dt-nav button+button{text-align:right;border-left:1px solid var(--line);padding-left:24px}
+.dt-nav small{font:500 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.dt-nav b{font:700 clamp(22px,3.4vw,48px)/1.05 var(--sans);letter-spacing:-.035em;transition:color .2s}
+.dt-nav button:hover b{color:var(--a)}
+@media(max-width:820px){.dt-g{grid-template-columns:1fr}.dt-meta,.dt-body{grid-column:1}.dt-media .dm{border-radius:12px}.dt-nav b{font-size:20px}}
+
+/* ===== gradient room hero ===== */
+.rm{position:relative;height:100vh;height:100svh;min-height:560px;margin:0 calc(-1 * max(16px,env(safe-area-inset-right,0px))) 0 calc(-1 * max(16px,env(safe-area-inset-left,0px)));overflow:hidden;background:radial-gradient(60% 55% at 50% 50%,#050a3a 0,#0f3fff 38%,#3a9bff 70%,#cdeeff 100%)}
+.rm:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:38%;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(11,11,13,0),rgba(11,11,13,.7) 55%,#0b0b0d)}
+.rm canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.rm .rl{position:absolute;z-index:2;left:max(16px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-62%);color:#fff;max-width:40vw}
+.rm .rl b{display:block;font:500 clamp(26px,3.6vw,56px)/1.05 var(--sans);letter-spacing:-.035em}
+.rm .rl span{display:block;margin-top:16px;font:400 13px/1.6 var(--sans);letter-spacing:.06em;text-transform:uppercase;opacity:.9}
+.rm .rn{position:absolute;z-index:2;right:4vw;bottom:5vh;margin:0;text-align:right;color:#fff;font:700 clamp(54px,12vw,200px)/1.02 var(--sans);letter-spacing:-.045em;padding-bottom:.04em;text-shadow:0 0 60px rgba(0,10,80,.35)}
+.rm .rs{position:absolute;z-index:2;left:max(16px,env(safe-area-inset-left,0px));bottom:3.5vh;color:#fff;font:400 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+@media(max-width:700px){.rm .rl{top:22%;transform:none;max-width:70vw}.rm .rn{right:16px;bottom:8vh}}
+.bar{mix-blend-mode:normal;text-shadow:0 0 14px rgba(0,0,0,.25)}
+
+.dt-media .fg{margin:0}.dt-media figcaption{margin-top:10px;font:400 13px/1.6 var(--kr);color:var(--mut);max-width:80ch}.dt-media figcaption b{font:500 12px var(--sans);letter-spacing:.08em;color:var(--fg);margin-right:8px}
 </style>
 
 <div class="intro" id="intro" aria-hidden="true"><div class="it"><span>Portfolio 2027</span><span>Seoul, KR</span></div><div class="ib"><div class="nm">Songjoo Choi</div><div class="ct" id="ict">000</div></div><div class="bar2" id="ib2"></div></div>
 <script>document.documentElement.classList.add("js");if(!matchMedia("(prefers-reduced-motion:reduce)").matches)document.documentElement.classList.add("intro-on")</script>
 <div class="bar">
   <div class="loc"><span>Seoul, KR</span><span id="clk">--:--:--</span></div>
-  <nav><a href="#work">Work</a><a href="#info">Info</a><span class="lang"><button type="button" data-l="ko">KR</button><button type="button" data-l="ja">JP</button></span></nav>
+  <nav><a href="#work">Work</a><a href="#info">Info</a><span class="lang"><button type="button" data-l="ko">KR</button><button type="button" data-l="ja">JP</button><button type="button" data-l="en">EN</button><button type="button" data-l="zh">ZH</button></span></nav>
 </div>
 
 <div class="wrap">
+<section class="rm" id="room" aria-label="Songjoo Choi"><canvas id="rmc"></canvas><div class="rl"><b>Creative<br>Technologist</b></div><h1 class="rn">Songjoo<br>Choi</h1></section>
 <section class="state">
-  <span class="ln"><span class="li"><span class="kr"><span data-ko="경험의 구조를" data-ja="経験の構造を">경험의 구조를</span></span> <span class="strip s1"><video src="assets/garden.mp4" autoplay muted loop playsinline></video></span></span></span>
-  <span class="ln"><span class="li"><span class="kr"><span data-ko="그리고," data-ja="描き、">그리고,</span></span> <span class="glyph">✺</span> <span class="strip s2"><video src="assets/drift.mp4" autoplay muted loop playsinline></video></span> <span class="kr dim"><span data-ko="기술로" data-ja="技術で">기술로</span></span></span></span>
-  <span class="ln"><span class="li"><span class="kr"><span data-ko="움직이게" data-ja="動かし">움직이게</span></span> <span class="strip s3"><video src="assets/beyond.mp4" autoplay muted loop playsinline></video></span> <span class="kr"><span data-ko="합니다." data-ja="ます。">합니다.</span></span></span></span>
+  <span class="ln"><span class="li"><span class="kr"><span data-ko="경험의 구조를" data-zh="构建体验的结构" data-en="Shaping experience" data-ja="経験の構造を">경험의 구조를</span></span> <span class="strip s1"><video src="assets/garden.mp4" autoplay muted loop playsinline></video></span></span></span>
+  <span class="ln"><span class="li"><span class="kr"><span data-ko="그리고," data-zh="然后，" data-en="and," data-ja="描き、">그리고,</span></span> <span class="glyph">✺</span> <span class="strip s2"><video src="assets/drift.mp4" autoplay muted loop playsinline></video></span> <span class="kr dim"><span data-ko="기술로" data-zh="用技术" data-en="with tech" data-ja="技術で">기술로</span></span></span></span>
+  <span class="ln"><span class="li"><span class="kr"><span data-ko="움직이게" data-zh="让它" data-en="bringing it" data-ja="動かし">움직이게</span></span> <span class="strip s3"><video src="assets/beyond.mp4" autoplay muted loop playsinline></video></span> <span class="kr"><span data-ko="합니다." data-zh="动起来。" data-en="to life." data-ja="ます。">합니다.</span></span></span></span>
 </section>
 
 
@@ -157,62 +209,62 @@ html.intro-on{overflow:hidden}
   <div class="works">
 
     <article class="w" id="malmoi">
-      <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl" style="background:#fcf9fc"><img src="assets/malmoi.jpg" alt="말모이 — 그많은 말들은 어디로 갔을까?" style="width:100%;height:100%;object-fit:contain;background:#fcf9fc;display:block"></div><div class="sl"><video src="assets/malmoi-play.mp4" autoplay muted loop playsinline preload="metadata" style="object-fit:contain;background:#0b0b0d"></video></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
-      <div class="t"><div class="no">01</div><h3>Malmoi</h3><div class="ko" data-ko="말모이" data-ja="マルモイ">말모이</div>
-        <p data-ko="웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%." data-ja="ウェブカメラの手認識と人差し指ポインターで楽しむインタラクティブ展示。WebとTouchDesignerの役割を分け、3Dスキャンのツリーファイルを軽量化してリアルタイム動作の問題を解決しました。参加度は約65%。">웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%.</p>
+      <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl" style="background:#fcf9fc"><img src="assets/malmoi.jpg" alt="말모이 — 그많은 말들은 어디로 갔을까?" style="width:100%;height:100%;object-fit:contain;background:#fcf9fc;display:block"></div><div class="sl"><video src="assets/malmoi-play.mp4" autoplay muted loop playsinline preload="metadata" style="object-fit:contain;background:#0b0b0d"></video></div><div class="sl"><video src="assets/malmoi-wall.mp4" data-snd="1" autoplay muted loop playsinline preload="metadata" style="object-fit:contain;background:#0b0b0d"></video></div><div class="sl" style="background:#16171b"><img src="assets/malmoi-td.jpg" alt="TouchDesigner 네트워크 — 오디오 반응형 비주얼" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
+      <div class="t"><div class="no">01</div><h3>Malmoi</h3><div class="ko" data-ko="말모이" data-zh="词语汇集" data-en="Gathering of Words" data-ja="マルモイ">말모이</div>
+        <p data-ko="웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%. 말모이 리듬게임에 맞춰 움직이는 TouchDesigner 오디오 반응형 비주얼도 개발했습니다." data-zh="以网络摄像头手部识别和食指指针来体验的互动展览。我划分了网页与TouchDesigner的职责，并通过精简3D扫描的树木文件，解决了实时运行的问题。参与度约65%。还开发了配合Malmoi节奏游戏律动的TouchDesigner音频响应视觉。" data-en="An interactive exhibition driven by webcam hand tracking and an index-finger pointer. I split the roles between the web and TouchDesigner, and solved real-time performance problems by slimming down the 3D-scanned tree file. About 65% participation. I also built a TouchDesigner audio-reactive visual that moves to the Malmoi rhythm game." data-ja="ウェブカメラの手認識と人差し指ポインターで楽しむインタラクティブ展示。WebとTouchDesignerの役割を分け、3Dスキャンのツリーファイルを軽量化してリアルタイム動作の問題を解決しました。参加度は約65%。マルモイのリズムゲームに合わせて動く、TouchDesignerのオーディオリアクティブ・ビジュアルも開発しました。">웹캠 손 인식과 검지 포인터로 즐기는 인터랙티브 전시. 웹과 TouchDesigner의 역할을 나누고, 3D 스캔 트리 파일을 경량화해 실시간 구동 문제를 해결했습니다. 참여도 약 65%. 말모이 리듬게임에 맞춰 움직이는 TouchDesigner 오디오 반응형 비주얼도 개발했습니다.</p>
         <div class="tags"><i>Experience Design</i><i>Interaction Design</i><i>Creative Coding</i><i>Prototyping</i></div></div>
     </article>
 
     <article class="w" id="garden">
       <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl"><video src="assets/garden.mp4" autoplay muted loop playsinline preload="metadata"></video></div><div class="sl"><img src="assets/garden-still.jpg" alt="Organic Garden — 스틸 컷" loading="lazy"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
-      <div class="t"><div class="no">02</div><h3>Organic Garden</h3><div class="ko" data-ko="유기체 정원" data-ja="有機体の庭">유기체 정원</div>
-        <p data-ko="호텔 외벽 LED 미디어 파사드를 가정한 가상 제너레이티브 아트. 정원이 건물의 표면에서 숨 쉬듯 자라나는 장면을 그렸습니다." data-ja="ホテルの外壁LEDメディアファサードを想定した架空のジェネレーティブアート。庭が建物の表面で呼吸するように育っていく情景を描きました。">호텔 외벽 LED 미디어 파사드를 가정한 가상 제너레이티브 아트. 정원이 건물의 표면에서 숨 쉬듯 자라나는 장면을 그렸습니다.</p>
+      <div class="t"><div class="no">02</div><h3>Organic Garden</h3><div class="ko" data-ko="유기체 정원" data-zh="有机体花园" data-en="Garden of Organisms" data-ja="有機体の庭">유기체 정원</div>
+        <p data-ko="호텔 외벽 LED 미디어 파사드를 가정한 가상 제너레이티브 아트. 정원이 건물의 표면에서 숨 쉬듯 자라나는 장면을 그렸습니다." data-zh="以酒店外墙LED媒体立面为设想的虚拟生成艺术。描绘了花园仿佛呼吸一般在建筑表面生长的场景。" data-en="Virtual generative art imagined for a hotel's exterior LED media façade: a garden that seems to breathe and grow across the surface of the building." data-ja="ホテルの外壁LEDメディアファサードを想定した架空のジェネレーティブアート。庭が建物の表面で呼吸するように育っていく情景を描きました。">호텔 외벽 LED 미디어 파사드를 가정한 가상 제너레이티브 아트. 정원이 건물의 표면에서 숨 쉬듯 자라나는 장면을 그렸습니다.</p>
         <div class="tags"><i>Generative Art</i><i>Media Façade</i></div></div>
     </article>
 
     <article class="w" id="drift">
       <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl"><video src="assets/drift.mp4" autoplay muted loop playsinline preload="metadata"></video></div><div class="sl"><img src="assets/drift-still.jpg" alt="Drifting Ecosystem — 스틸 컷" loading="lazy"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
-      <div class="t"><div class="no">03</div><h3>Drifting Ecosystem</h3><div class="ko" data-ko="유영하는 생태" data-ja="泳ぐ生態系">유영하는 생태</div>
-        <p data-ko="공항 미디어월을 가정한 제너레이티브 미디어아트. 이동 중인 사람들 앞에서 떠다니는 생태계가 시선을 천천히 붙잡습니다." data-ja="空港のメディアウォールを想定したジェネレーティブ・メディアアート。移動中の人々の前を漂う生態系が、視線をゆっくりと捉えます。">공항 미디어월을 가정한 제너레이티브 미디어아트. 이동 중인 사람들 앞에서 떠다니는 생태계가 시선을 천천히 붙잡습니다.</p>
+      <div class="t"><div class="no">03</div><h3>Drifting Ecosystem</h3><div class="ko" data-ko="유영하는 생태" data-zh="游动的生态" data-en="Swimming Ecosystem" data-ja="泳ぐ生態系">유영하는 생태</div>
+        <p data-ko="공항 미디어월을 가정한 제너레이티브 미디어아트. 이동 중인 사람들 앞에서 떠다니는 생태계가 시선을 천천히 붙잡습니다." data-zh="以机场媒体墙为设想的生成式媒体艺术。漂浮在匆匆行人面前的生态系统，缓缓抓住人们的视线。" data-en="Generative media art imagined for an airport media wall: an ecosystem drifting in front of people on the move, slowly catching their eyes." data-ja="空港のメディアウォールを想定したジェネレーティブ・メディアアート。移動中の人々の前を漂う生態系が、視線をゆっくりと捉えます。">공항 미디어월을 가정한 제너레이티브 미디어아트. 이동 중인 사람들 앞에서 떠다니는 생태계가 시선을 천천히 붙잡습니다.</p>
         <div class="tags"><i>Generative Art</i><i>Media Wall</i></div></div>
     </article>
 
     <article class="w" id="beyond">
       <div class="m"><video src="assets/beyond.mp4" autoplay muted loop playsinline preload="metadata"></video></div>
-      <div class="t"><div class="no">04</div><h3>Beyond the Light</h3><div class="ko" data-ko="빛의너머 · 가상 프로젝트" data-ja="光のむこう · 架空プロジェクト">빛의너머 · 가상 프로젝트</div>
-        <p data-ko="빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다." data-ja="光を現実と非現実の境界として解釈した実験的モーションメディアアート。光へ向かって進入するカメラと、有機的に動く植物を重ねました。">빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다.</p>
+      <div class="t"><div class="no">04</div><h3>Beyond the Light</h3><div class="ko" data-ko="빛의너머 · 가상 프로젝트" data-zh="光之彼岸 · 虚构项目" data-en="Beyond the Light · Conceptual project" data-ja="光のむこう · 架空プロジェクト">빛의너머 · 가상 프로젝트</div>
+        <p data-ko="빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다." data-zh="将光诠释为现实与非现实边界的实验性动态媒体艺术。把驶向光的镜头与有机律动的植物叠加在一起。" data-en="Experimental motion media art that reads light as the boundary between the real and the unreal. A camera moving into the light is layered with organically moving plants." data-ja="光を現実と非現実の境界として解釈した実験的モーションメディアアート。光へ向かって進入するカメラと、有機的に動く植物を重ねました。">빛을 현실과 비현실의 경계로 해석한 실험적 모션 미디어아트. 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹쳤습니다.</p>
         <div class="tags"><i>Motion</i><i>Media Art</i><i>Experimental</i></div></div>
     </article>
     <article class="w" id="detroit">
-      <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl"><video src="assets/detroit.mp4" autoplay muted loop playsinline preload="metadata"></video></div><div class="sl"><img src="assets/detroit-capture.jpg" alt="Detroit: Become Human 작업 캡처" loading="lazy" style="object-fit:contain;background:#000"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
-      <div class="t"><div class="no">05</div><h3>Detroit: Become Human</h3><div class="ko" data-ko="개인 작업" data-ja="個人制作">개인 작업</div>
-        <p data-ko="게임 〈Detroit: Become Human〉에서 영감을 받은 개인 작업. 인간과 안드로이드 사이의 경계를 영상으로 풀어냈고, 3D 렌더링과 실시간 연동 작업으로 확장해 완성할 예정입니다." data-ja="ゲーム『Detroit: Become Human』から着想を得た個人制作。人間とアンドロイドの境界を映像で表現し、3Dレンダリングとリアルタイム連動へと発展させて完成させる予定です。">게임 〈Detroit: Become Human〉에서 영감을 받은 개인 작업. 인간과 안드로이드 사이의 경계를 영상으로 풀어냈고, 3D 렌더링과 실시간 연동 작업으로 확장해 완성할 예정입니다.</p>
+      <div class="m car"><span class="hint">Swipe →</span><div class="track"><div class="sl"><video src="assets/detroit.mp4" autoplay muted loop playsinline preload="metadata"></video></div><div class="sl"><img src="assets/detroit-capture.jpg" alt="Detroit: Become Human 작업 캡처" loading="lazy" style="object-fit:contain;background:#000"></div><div class="sl"><img src="assets/detroit-1.jpg" alt="Detroit: Become Human 작업 이미지 1" loading="lazy" style="object-fit:contain;background:#000"></div><div class="sl"><img src="assets/detroit-2.jpg" alt="Detroit: Become Human 작업 이미지 2" loading="lazy" style="object-fit:contain;background:#000"></div></div><button class="nav prev" type="button" aria-label="이전" disabled>‹</button><button class="nav next" type="button" aria-label="다음">›</button><div class="dots"></div></div>
+      <div class="t"><div class="no">05</div><h3>Detroit: Become Human</h3><div class="ko" data-ko="개인 작업" data-zh="个人作品" data-en="Personal project" data-ja="個人制作">개인 작업</div>
+        <p data-ko="게임 〈Detroit: Become Human〉에서 영감을 받은 개인 작업. 인간과 안드로이드 사이의 경계를 영상으로 풀어냈고, 3D 렌더링과 실시간 연동 작업으로 확장해 완성할 예정입니다." data-zh="受游戏《Detroit: Become Human》启发的个人作品。以影像表现人类与仿生人之间的界限，并计划通过3D渲染与实时联动加以扩展，最终完成。" data-en="A personal project inspired by the game Detroit: Become Human. It expresses the boundary between humans and androids in video, and I plan to extend it with 3D rendering and real-time interaction to complete it." data-ja="ゲーム『Detroit: Become Human』から着想を得た個人制作。人間とアンドロイドの境界を映像で表現し、3Dレンダリングとリアルタイム連動へと発展させて完成させる予定です。">게임 〈Detroit: Become Human〉에서 영감을 받은 개인 작업. 인간과 안드로이드 사이의 경계를 영상으로 풀어냈고, 3D 렌더링과 실시간 연동 작업으로 확장해 완성할 예정입니다.</p>
         <div class="tags"><i>Personal Project</i><i>Inspired by Game</i><i>Motion</i></div></div>
     </article>
   </div>
 </section>
 
 <section id="info" class="info">
-  <p class="big" data-ko="경험을 <em>설계</em>하는 것에서 멈추지 않고, 그것이 실제로 <em>움직이는 것</em>까지 만듭니다." data-ja="経験を<em>設計</em>するだけで終わらず、それが実際に<em>動くところ</em>までつくります。">경험을 <em>설계</em>하는 것에서 멈추지 않고, 그것이 실제로 <em>움직이는 것</em>까지 만듭니다.</p>
+  <p class="big" data-ko="경험을 <em>설계</em>하는 것에서 멈추지 않고, 그것이 실제로 <em>움직이는 것</em>까지 만듭니다." data-zh="不止于<em>设计</em>体验，而是做到它真正<em>动起来</em>。" data-en="I don't stop at <em>designing</em> experiences. I build them until they actually <em>move</em>." data-ja="経験を<em>設計</em>するだけで終わらず、それが実際に<em>動くところ</em>までつくります。">경험을 <em>설계</em>하는 것에서 멈추지 않고, 그것이 실제로 <em>움직이는 것</em>까지 만듭니다.</p>
   <div class="cols">
     <div><h4>Tools &amp; Skills</h4><div class="chips"><span>HTML / CSS / JavaScript</span><span>TouchDesigner</span><span>Figma</span><span>Framer</span><span>Blender</span><span>Python</span></div></div>
     <div><h4>Background</h4><ul>
-      <li data-ko="계원예술대학교 디지털미디어디자인학과 · 2027.02 졸업예정" data-ja="桂園芸術大学 デジタルメディアデザイン学科 · 2027年2月卒業予定">계원예술대학교 디지털미디어디자인학과 · 2027.02 졸업예정</li>
-      <li data-ko="학과 연합 PT 우수작 선정·발표 2회" data-ja="学科合同プレゼンテーション優秀作に選出・発表2回">학과 연합 PT 우수작 선정·발표 2회</li>
-      <li data-ko="학과 과대표 · 프로그래밍 세부전공 과대표" data-ja="学科代表 · プログラミング専攻代表">학과 과대표 · 프로그래밍 세부전공 과대표</li>
+      <li data-ko="계원예술대학교 디지털미디어디자인학과 · 2027.02 졸업예정" data-zh="桂园艺术大学 数字媒体设计系 · 预计2027年2月毕业" data-en="Kaywon University of Art &amp; Design, Digital Media Design · Graduating Feb 2027" data-ja="桂園芸術大学 デジタルメディアデザイン学科 · 2027年2月卒業予定">계원예술대학교 디지털미디어디자인학과 · 2027.02 졸업예정</li>
+      <li data-ko="학과 연합 PT 우수작 선정·발표 2회" data-zh="入选系联合演示会优秀作品并发表2次" data-en="Selected and presented twice at the department's joint presentation showcase" data-ja="学科合同プレゼンテーション優秀作に選出・発表2回">학과 연합 PT 우수작 선정·발표 2회</li>
+      <li data-ko="학과 과대표 · 프로그래밍 세부전공 과대표" data-zh="系代表 · 编程方向代表" data-en="Department representative · Programming track representative" data-ja="学科代表 · プログラミング専攻代表">학과 과대표 · 프로그래밍 세부전공 과대표</li>
       <li>JLPT N2 · HSK 3급</li></ul></div>
   </div>
   <div class="diff">
-    <div><b>01 — Creative Web</b><p data-ko="포트폴리오 자체를 인터랙티브한 웹 경험으로 설계합니다." data-ja="ポートフォリオ自体をインタラクティブなウェブ体験として設計します。">포트폴리오 자체를 인터랙티브한 웹 경험으로 설계합니다.</p></div>
-    <div><b>02 — Problem Solving</b><p data-ko="문제를 정의하고 해결해 나간 과정을 작업의 서사로 남깁니다." data-ja="課題を定義し、解決していった過程を作品の物語として残します。">문제를 정의하고 해결해 나간 과정을 작업의 서사로 남깁니다.</p></div>
-    <div><b>03 — Design × Code</b><p data-ko="경험 설계와 직접 구현을 함께 해냅니다." data-ja="体験設計と自らの実装を両立します。">경험 설계와 직접 구현을 함께 해냅니다.</p></div>
+    <div><b>01 — Creative Web</b><p data-ko="포트폴리오 자체를 인터랙티브한 웹 경험으로 설계합니다." data-zh="把作品集本身设计成互动的网页体验。" data-en="I design the portfolio itself as an interactive web experience." data-ja="ポートフォリオ自体をインタラクティブなウェブ体験として設計します。">포트폴리오 자체를 인터랙티브한 웹 경험으로 설계합니다.</p></div>
+    <div><b>02 — Problem Solving</b><p data-ko="문제를 정의하고 해결해 나간 과정을 작업의 서사로 남깁니다." data-zh="把定义并解决问题的过程，留作每件作品的叙事。" data-en="I keep the process of defining and solving problems as the story of each work." data-ja="課題を定義し、解決していった過程を作品の物語として残します。">문제를 정의하고 해결해 나간 과정을 작업의 서사로 남깁니다.</p></div>
+    <div><b>03 — Design × Code</b><p data-ko="경험 설계와 직접 구현을 함께 해냅니다." data-zh="体验设计与亲手实现，一并完成。" data-en="I do experience design and hands-on implementation together." data-ja="体験設計と自らの実装を両立します。">경험 설계와 직접 구현을 함께 해냅니다.</p></div>
   </div>
 </section>
 
 <footer class="foot">
   <div class="logo">Songjoo<br>Choi</div>
   <div class="fcols">
-    <div><h4>Connect</h4><a href="https://github.com/songjoochoi" target="_blank" rel="noopener">GitHub ↗</a><a href="https://songjoochoi.github.io/portfoliomiddle/assets/resume.pdf" target="_blank" rel="noopener" data-ko="이력서 ↗" data-ja="履歴書 ↗">이력서 ↗</a><a href="https://songjoochoi.github.io/portfoliomiddle/assets/statement.pdf" target="_blank" rel="noopener" data-ko="자기소개서 ↗" data-ja="自己紹介書 ↗">자기소개서 ↗</a><span id="mail" style="user-select:all">songjoo0531@naver.com</span></div>
+    <div><h4>Connect</h4><a href="https://github.com/songjoochoi" target="_blank" rel="noopener">GitHub ↗</a><a href="https://songjoochoi.github.io/portfoliomiddle/assets/resume.pdf" target="_blank" rel="noopener" data-ko="이력서 ↗" data-zh="简历 ↗" data-en="Résumé ↗" data-ja="履歴書 ↗">이력서 ↗</a><a href="https://songjoochoi.github.io/portfoliomiddle/assets/statement.pdf" target="_blank" rel="noopener" data-ko="자기소개서 ↗" data-zh="自我介绍书 ↗" data-en="Personal statement ↗" data-ja="自己紹介書 ↗">자기소개서 ↗</a><span id="mail" style="user-select:all">songjoo0531@naver.com</span></div>
     <div><h4>Disciplines</h4><span>Interaction Design</span><span>Creative Coding</span><span>Generative Art</span><span>Web Experience</span></div>
     <div><h4>Based in</h4><span>Seoul, KR</span></div>
   </div>
@@ -220,7 +272,8 @@ html.intro-on{overflow:hidden}
 </footer>
 </div>
 
-<div class="mq"><div id="mqc"></div></div>
+
+<div class="dt" id="dt" role="dialog" aria-modal="true" aria-hidden="true"><div class="dt-in"><div class="dt-top"><button type="button" id="dtx">← <span data-ko="작업 목록" data-zh="全部作品" data-en="All works" data-ja="作品一覧">작업 목록</span></button><span class="cnt" id="dtc"></span><button type="button" id="dtx2">Close ✕</button></div><div id="dtb"></div></div></div>
 
 <script>
 (function(){
@@ -231,7 +284,7 @@ html.intro-on{overflow:hidden}
     try{localStorage.setItem('lang',l)}catch(e){}}
   document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.getAttribute('data-l'))})});
   var saved='ko';try{saved=localStorage.getItem('lang')||'ko'}catch(e){}
-  setLang(saved==='ja'?'ja':'ko');
+  setLang(saved==='ja'||saved==='en'||saved==='zh'?saved:'ko');
   (function(){var t='<span>Interaction</span><b>✺</b><i>Creative Coding</i><b>✺</b><span>Generative Art</span><b>✺</b><i>Experience Design</i><b>✺</b>';var e=document.getElementById('tkc');if(e)e.innerHTML=t+t+t+t;
   document.querySelectorAll('.strip').forEach(function(s){s.addEventListener('animationend',function(ev){if(ev.target===s)s.classList.add('done')})});
   var hero=document.getElementById('start');
@@ -263,11 +316,86 @@ html.intro-on{overflow:hidden}
       car.addEventListener('pointerdown',function(){down=true;clearTimeout(tm);clearInterval(tm)});
       addEventListener('pointerup',function(){down=false})});
   })();
+
+  (function(){
+    var DT={
+      malmoi:{caps:[["타이틀 화면 — 〈말모이〉 메인 비주얼", "タイトル画面 — 『マルモイ』メインビジュアル", "Title screen — the main visual of Malmoi", "标题画面 — Malmoi主视觉"], ["게임 플레이 화면 녹화 (앞부분 약 1분)", "ゲームプレイ画面の録画（冒頭約1分）", "Gameplay screen recording (first minute)", "游戏实机画面录屏（开头约1分钟）"], ["TouchDesigner 오디오 반응형 비주얼 데모 — 임시 음원으로 구동, Unity 메인 게임과는 연결 전 (소리 재생 가능)", "TouchDesignerのオーディオリアクティブ・ビジュアルのデモ — 仮の音源で動作、Unityのメインゲームとは連携前（音声再生可）", "Demo of the TouchDesigner audio-reactive visual, running on a placeholder track and not yet connected to the main game in Unity (sound available)", "TouchDesigner音频响应视觉演示 — 使用临时音源运行，尚未与Unity主游戏连接（可播放声音）"], ["TouchDesigner 네트워크 화면 — 음원 분석 노드와 GLSL 비주얼 노드로 구성", "TouchDesignerのネットワーク画面 — 音源解析ノードとGLSLビジュアルノードで構成", "TouchDesigner network — built from audio-analysis nodes and GLSL visual nodes", "TouchDesigner节点网络 — 由音源分析节点与GLSL视觉节点构成"]],rows:[['유형','種類','인터랙티브 전시','インタラクティブ展示','Type','Interactive exhibition','类型','互动展览'],['도구','ツール','웹 · TouchDesigner · 3D 스캔','Web · TouchDesigner · 3Dスキャン','Tools','Web · TouchDesigner · 3D scan','工具','网页 · TouchDesigner · 3D扫描'],['성과','成果','웹캠 손 인식 기반 참여도 약 65%','ウェブカメラ手認識で参加度約65%','Result','About 65% participation via webcam hand tracking','成果','基于摄像头手部识别，参与度约65%'],['상태','状態','Unity 메인 게임과 연결 전 · 임시 음원 사용','Unityメインゲームとの連携前 · 仮の音源を使用','Status','Not yet connected to the Unity main game · placeholder audio','状态','尚未与Unity主游戏连接 · 使用临时音源']],sec:{t:['오디오 반응형 비주얼','オーディオリアクティブ・ビジュアル','Audio-reactive visual','音频响应视觉'],b:['TouchDesigner로 개발한 비주얼입니다. 음원을 저·중·고음 대역으로 나눠 분석하고, 말모이 리듬게임에 맞춰 움직이도록 만들었습니다. 아직 Unity 메인 게임과는 연결하지 않아 임시 음원으로 구동하고 있습니다.','TouchDesignerで開発したビジュアルです。音源を低・中・高音域に分けて解析し、マルモイのリズムゲームに合わせて動くように作りました。まだUnityのメインゲームとは連携しておらず、仮の音源で動作させています。','A visual built in TouchDesigner. It analyzes the audio in low, mid and high bands and is designed to move with the Malmoi rhythm game. It is not yet connected to the main game in Unity, so it currently runs on a placeholder track.','用TouchDesigner开发的视觉作品。将音源分为低、中、高音频段进行分析，并配合Malmoi节奏游戏律动。目前尚未与Unity主游戏连接，因此使用临时音源运行。']}},
+      garden:{caps:[["영상 — 호텔 외벽 LED 미디어 파사드를 가정한 제너레이티브 아트", "映像 — ホテル外壁LEDメディアファサードを想定したジェネレーティブアート", "Video — generative art imagined for a hotel exterior LED media façade", "视频 — 为酒店外墙LED媒体立面设想的生成艺术"], ["스틸 컷", "スチル", "Still frame", "静帧"]],rows:[['유형','種類','가상 제너레이티브 아트','架空ジェネレーティブアート','Type','Virtual generative art','类型','虚拟生成艺术'],['설정','想定','호텔 외벽 LED 미디어 파사드','ホテル外壁LEDメディアファサード','Setting','Hotel exterior LED media façade','设定','酒店外墙LED媒体立面']]},
+      drift:{caps:[["영상 — 공항 미디어월을 가정한 제너레이티브 미디어아트", "映像 — 空港のメディアウォールを想定したジェネレーティブ・メディアアート", "Video — generative media art imagined for an airport media wall", "视频 — 为机场媒体墙设想的生成式媒体艺术"], ["스틸 컷", "スチル", "Still frame", "静帧"]],rows:[['유형','種類','가상 제너레이티브 미디어아트','架空ジェネレーティブメディアアート','Type','Virtual generative media art','类型','虚拟生成式媒体艺术'],['설정','想定','공항 미디어월','空港のメディアウォール','Setting','Airport media wall','设定','机场媒体墙']]},
+      beyond:{caps:[["영상 — 빛을 향해 진입하는 카메라와 유기적으로 움직이는 식물을 겹친 모션 미디어아트", "映像 — 光へ進入するカメラと有機的に動く植物を重ねたモーションメディアアート", "Video — motion media art layering a camera moving into the light with organically moving plants", "视频 — 将驶向光的镜头与有机律动的植物叠加的动态媒体艺术"]],rows:[['유형','種類','실험적 모션 미디어아트','実験的モーションメディアアート','Type','Experimental motion media art','类型','实验性动态媒体艺术'],['구분','区分','가상 프로젝트','架空プロジェクト','Category','Conceptual project','类别','虚构项目'],['컨셉','コンセプト','빛 = 현실과 비현실의 경계','光 = 現実と非現実の境界','Concept','Light as the boundary between real and unreal','概念','光 = 现实与非现实的边界']]},
+      detroit:{caps:[["영상 — 〈Detroit: Become Human〉에서 영감을 받은 개인 작업", "映像 — 『Detroit: Become Human』から着想を得た個人制作", "Video — a personal project inspired by Detroit: Become Human", "视频 — 受《Detroit: Become Human》启发的个人作品"], ["작업 캡처 화면", "作業のキャプチャ画面", "Capture of the work in progress", "作品截图"], ["작업 이미지", "作業イメージ", "Work image", "作品图像"], ["작업 이미지", "作業イメージ", "Work image", "作品图像"]],rows:[['유형','種類','개인 작업 · 게임에서 영감','個人制作 · ゲームから着想','Type','Personal project · inspired by a game','类型','个人作品 · 受游戏启发'],['진행','進行','3D 렌더링·실시간 연동으로 확장 예정','3Dレンダリング・リアルタイム連動へ拡張予定','Status','To be extended with 3D rendering and real-time interaction','进展','计划以3D渲染与实时联动加以扩展']]}
+    };
+    var dt=document.getElementById('dt'),box=document.getElementById('dtb'),cnt=document.getElementById('dtc'),
+        arts=[].slice.call(document.querySelectorAll('article.w')),ids=arts.map(function(a){return a.id}),cur_i=-1,root=document.documentElement;
+    function L(a,k){return a.getAttribute('data-'+cur)}
+    function lang(e){return e.getAttribute('data-'+cur)||e.textContent}
+    function render(i){
+      var a=arts[i],d=DT[a.id]||{rows:[]},j=cur==='ja'?1:cur==='en'?4:cur==='zh'?6:0,esc=function(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')};
+      var h3=a.querySelector('h3').textContent,ko=a.querySelector('.ko'),p=a.querySelector('p'),tags=a.querySelector('.tags');
+      var n=a.querySelector('.no').textContent;
+      var rows=d.rows.map(function(r){return '<div><dt>'+esc(r[j])+'</dt><dd>'+esc(r[j>=4?j+1:2+j])+'</dd></div>'}).join('');
+      var q=cur==='ja'?1:cur==='en'?2:cur==='zh'?3:0,sec=d.sec?'<h4>'+esc(d.sec.t[q])+'</h4><p class="sec">'+esc(d.sec.b[q])+'</p>':'';
+      var nx=arts[(i+1)%arts.length],pv=arts[(i-1+arts.length)%arts.length];
+      box.innerHTML='<span class="no">'+n+'</span><h2>'+esc(h3)+'</h2><p class="sub">'+lang(ko)+'</p>'
+        +'<div class="dt-g"><dl class="dt-meta">'+rows+'<div><dt>Tags</dt><dd><div class="tags">'+tags.innerHTML+'</div></dd></div></dl>'
+        +'<div class="dt-body"><p class="lead">'+lang(p)+'</p>'+sec+'</div></div><div class="dt-media" id="dtm"></div>'
+        +'<div class="dt-nav"><button type="button" data-g="'+(i-1+arts.length)%arts.length+'"><small>← Prev</small><b>'+esc(pv.querySelector('h3').textContent)+'</b></button><button type="button" data-g="'+(i+1)%arts.length+'"><small>Next →</small><b>'+esc(nx.querySelector('h3').textContent)+'</b></button></div>';
+      var m=document.getElementById('dtm'),src=a.querySelectorAll('.sl>img,.sl>video,.m>video');
+      [].forEach.call(src,function(el,ii){var w=document.createElement('div');w.className='dm';var s=el.parentNode;if(s.classList.contains('sl')&&s.getAttribute('style'))w.setAttribute('style',s.getAttribute('style'));
+        var c=el.cloneNode(true);if(c.tagName==='VIDEO'){c.removeAttribute('autoplay');c.removeAttribute('muted');c.autoplay=false;c.muted=false;c.controls=true;c.loop=true;c.playsInline=true;c.preload='metadata'}else c.loading='eager';w.appendChild(c);var fg=document.createElement('figure');fg.className='fg';fg.appendChild(w);var cp=(d.caps||[])[ii];if(cp){var fc=document.createElement('figcaption');fc.innerHTML=esc(cp[cur==='ja'?1:cur==='en'?2:cur==='zh'?3:0]);fg.appendChild(fc)}m.appendChild(fg)});
+      
+      cnt.textContent=n+' / '+String(arts.length).padStart(2,'0');
+      box.querySelectorAll('.dt-nav button').forEach(function(b){b.addEventListener('click',function(){render(+b.getAttribute('data-g'));dt.scrollTo({top:0})})});
+      cur_i=i;
+    }
+    function open(i){render(i);dt.classList.add('on');dt.setAttribute('aria-hidden','false');root.classList.add('dt-open');dt.scrollTop=0}
+    function close(){dt.classList.remove('on');dt.setAttribute('aria-hidden','true');root.classList.remove('dt-open');box.querySelectorAll('video').forEach(function(v){v.pause()});if(cur_i>=0){var a=arts[cur_i];if(a)a.scrollIntoView({block:'center'})}cur_i=-1}
+    arts.forEach(function(a,i){var t=a.querySelector('.t'),b=document.createElement('button');b.type='button';b.className='more';b.innerHTML='<span data-ko="상세 보기" data-zh="查看详情" data-en="View project" data-ja="詳細を見る">상세 보기</span> →';b.firstChild.textContent=b.firstChild.getAttribute('data-'+cur);
+      t.appendChild(b);b.addEventListener('click',function(){open(i)});a.querySelector('h3').addEventListener('click',function(){open(i)})});
+    document.getElementById('dtx').addEventListener('click',close);document.getElementById('dtx2').addEventListener('click',close);
+    addEventListener('keydown',function(e){if(!dt.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight'){render((cur_i+1)%arts.length);dt.scrollTo({top:0})}if(e.key==='ArrowLeft'){render((cur_i-1+arts.length)%arts.length);dt.scrollTo({top:0})}});
+    document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setTimeout(function(){if(cur_i>=0)render(cur_i)},0)})});
+  })();
+
+  (function(){
+    var sec=document.getElementById('room'),cv=document.getElementById('rmc');if(!sec||!cv)return;
+    var gl=cv.getContext('webgl',{antialias:false,alpha:false});if(!gl){cv.style.display='none';return}
+    var vs='attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+    var fs='precision highp float;uniform vec2 R;uniform vec2 C;uniform float T;uniform float Z;'
+    +'vec3 tint(float x){x=fract(x/6.)*6.;vec3 a=vec3(.06,.26,1.),b=vec3(.45,.2,1.),c=vec3(1.,.18,.62),d=vec3(.62,1.,.2),e=vec3(.05,.85,.95);'
+    +'if(x<1.)return mix(a,b,smoothstep(0.,1.,x));if(x<2.)return mix(b,c,smoothstep(0.,1.,x-1.));if(x<3.)return mix(c,d,smoothstep(0.,1.,x-2.));if(x<4.)return mix(d,e,smoothstep(0.,1.,x-3.));if(x<5.)return mix(e,a,smoothstep(0.,1.,x-4.));return a;}'
+    +'vec3 ramp(float m,vec3 t){vec3 c0=mix(t,vec3(1.),.72),c1=mix(t,vec3(1.),.18),c2=t,c3=t*.3,c4=t*.07;vec3 x=mix(c0,c1,smoothstep(0.,.3,m));x=mix(x,c2,smoothstep(.3,.6,m));x=mix(x,c3,smoothstep(.6,.85,m));return mix(x,c4,smoothstep(.85,1.,m));}'
+    +'float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}'
+    +'void main(){vec2 p=gl_FragCoord.xy-C*R;vec2 q=abs(p)/(vec2(R.x*.17,R.y*.21)*Z);float d=max(q.x,q.y);'
+    +'float t=clamp(1./max(d,.0001),0.,1.);float m=pow(t,.62);m=clamp(m,0.,1.);'
+    +'float ld=log2(max(d,.3));float hh=T*.17-ld*.32;vec3 col=ramp(clamp(m+.13*sin(T*1.0-ld*2.),0.,1.),tint(hh));'
+    +'col*=.84+.16*sin(ld*2.6-T*1.3);'
+    +'float sh=q.x>q.y?(p.x<0.?1.:.76):(p.y>0.?.9:.82);if(d<1.)sh=.97;'
+    +'col*=sh;col+=(h(gl_FragCoord.xy+T)-.5)*.02;gl_FragColor=vec4(col,1.);}';
+    function sh(t,s){var o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return gl.getShaderParameter(o,gl.COMPILE_STATUS)?o:null}
+    var v=sh(gl.VERTEX_SHADER,vs),f=sh(gl.FRAGMENT_SHADER,fs);if(!v||!f){cv.style.display='none';return}
+    var pr=gl.createProgram();gl.attachShader(pr,v);gl.attachShader(pr,f);gl.linkProgram(pr);if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){cv.style.display='none';return}
+    gl.useProgram(pr);var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+    var al=gl.getAttribLocation(pr,'a');gl.enableVertexAttribArray(al);gl.vertexAttribPointer(al,2,gl.FLOAT,false,0,0);
+    var uR=gl.getUniformLocation(pr,'R'),uC=gl.getUniformLocation(pr,'C'),uT=gl.getUniformLocation(pr,'T'),uZ=gl.getUniformLocation(pr,'Z');
+    var W=1,H=1;function size(){var k=Math.min(devicePixelRatio||1,1.5);W=cv.width=Math.round(sec.clientWidth*k);H=cv.height=Math.round(sec.clientHeight*k);gl.viewport(0,0,W,H)}
+    size();addEventListener('resize',size);
+    var tx=.5,ty=.5,cx=.5,cy=.5,zs=0,live=true,still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    sec.addEventListener('pointermove',function(e){var r=sec.getBoundingClientRect();tx=.5+((e.clientX-r.left)/r.width-.5)*.6;ty=.5-((e.clientY-r.top)/r.height-.5)*.6});
+    sec.addEventListener('pointerleave',function(){tx=.5;ty=.5});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){live=es[0].isIntersecting}).observe(sec);
+    var t0=performance.now();
+    function draw(now){if(live){var T=(now-t0)/1000;if(!still){cx+=(tx+.07*Math.sin(T*.55)-cx)*.06;cy+=(ty+.05*Math.cos(T*.43)-cy)*.06}
+      var sc=Math.min(1,Math.max(0,scrollY/(sec.clientHeight*.9))),zt=1+sc*2.4,it=Math.min(1,Math.max(0,(T-.9)/2.6)),ie=1-Math.pow(1-it,3);if(still){zs=zt}else{zs+=(zt-zs)*.08}gl.uniform1f(uZ,zs*(.5+.5*ie)*(1+1.1*(.5-.5*Math.cos(T*.85))));gl.uniform2f(uR,W,H);gl.uniform2f(uC,cx,cy);gl.uniform1f(uT,still?0:T);gl.drawArrays(gl.TRIANGLE_STRIP,0,4)}
+      if(!still)requestAnimationFrame(draw)}
+    requestAnimationFrame(draw);
+  })();
+
   function clock(){try{document.getElementById('clk').textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Seoul',hour12:false})}catch(e){}}
   clock();setInterval(clock,1000);
   document.getElementById('top').addEventListener('click',function(e){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});
   var t='Songjoo Choi<b>✺</b>Creative Technologist<b>✺</b>Experience Design<b>✺</b>Media Art<b>✺</b>';
-  document.getElementById('mqc').innerHTML=t+t+t+t;
+  
   var vs=document.querySelectorAll('video');
   if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})},{rootMargin:'100px'});
   vs.forEach(function(v){io.observe(v)})}
