@@ -67,8 +67,15 @@ html.dt-open{overflow-y:hidden}
 .dt-meta dd{margin:0;font-size:14px;color:var(--ink-hi)}
 .dt-body{grid-column:5/13;min-width:0}
 .dt-body .lead{margin:0 0 6vh;font:500 clamp(16px,1.5vw,19px)/1.55 var(--kr);letter-spacing:-.03em;text-wrap:pretty}
-.dt-body h4{margin:0 0 12px;font:500 12px var(--sans);color:var(--a)}
-.dt-body .sec{margin:0 0 6vh;font-size:15px;color:var(--ink-2);max-width:60ch}
+.dt-body .sx{display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr);gap:8px 24px;border-top:1px solid var(--line);padding:22px 0 26px}
+.dt-body h4{margin:2px 0 0;font:600 13px var(--kr);color:var(--a);word-break:keep-all}
+.dt-body .sec{margin:0;padding:0;list-style:none;font-size:15px;line-height:1.7;color:var(--ink-2);max-width:68ch;word-break:keep-all;overflow-wrap:break-word}
+.dt-body .sec li{position:relative;padding-left:14px;margin:0 0 6px}
+.dt-body .sec li:before{content:"";position:absolute;left:2px;top:.78em;width:4px;height:4px;border-radius:50%;background:var(--mut)}
+.dt-body .sec li:last-child{margin-bottom:0}
+.dt-body .sec.np li{padding-left:0}.dt-body .sec.np li:before{display:none}
+.dt-meta{position:sticky;top:72px;align-self:start}
+@media (max-width:760px){.dt-body .sx{grid-template-columns:minmax(0,1fr)}.dt-meta{position:static}}
 .dt-media{display:grid;gap:clamp(16px,2vw,28px);margin:8vh 0}
 .dt-media .fg{margin:0}
 .dt-media .dm{aspect-ratio:16/9;border-radius:2px;overflow:hidden;background:var(--card)}
@@ -192,7 +199,7 @@ html{scroll-behavior:auto}
       var h3=a.querySelector('h3').textContent,ko=a.querySelector('.ko'),p=a.querySelector('p'),tags=a.querySelector('.tags');
       var n=String(i+1).padStart(2,'0');
       var rows=d.rows.map(function(r){return '<div><dt>'+esc(r[j]||r[0])+'</dt><dd>'+esc(r[j>=4?j+1:2+j]||r[2])+'</dd></div>'}).join('');
-      var q=cur==='ja'?1:cur==='en'?2:0,sec=(d.secs||(d.sec?[d.sec]:[])).map(function(x){return '<h4>'+esc(x.t[q]||x.t[0])+'</h4><p class="sec">'+esc(x.b[q]||x.b[0]).replace(/\n/g,'<br>')+'</p>'}).join('');
+      var q=cur==='ja'?1:cur==='en'?2:0,sec=(d.secs||(d.sec?[d.sec]:[])).map(function(x){return '<div class="sx"><h4>'+esc(x.t[q]||x.t[0])+'</h4><ul class="sec'+(/^\s*·/.test(x.b[q]||x.b[0])?'':' np')+'">'+esc(x.b[q]||x.b[0]).split('\n').map(function(l){return '<li>'+l.replace(/^\s*·\s*/,'')+'</li>'}).join('')+'</ul></div>'}).join('');
       var nx=arts[(i+1)%arts.length],pv=arts[(i-1+arts.length)%arts.length];
       box.innerHTML='<h2>'+esc(h3)+'</h2><p class="sub">'+lang(ko)+'</p>'
         +'<div class="dt-g"><dl class="dt-meta">'+rows+'<div><dt>Tags</dt><dd><div class="tags">'+tags.innerHTML+'</div></dd></div></dl>'
