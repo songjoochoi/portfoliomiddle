@@ -1,5 +1,6 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Songjoo Choi Portfolio</title><meta name="description" content="크리에이티브 테크놀로지스트 Songjoo Choi의 포트폴리오. 인터랙티브 전시, 제너레이티브 미디어아트, 크리에이티브 웹 작업."></head><body>
 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@32,600&family=Geist+Mono:wght@400&display=block">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap">
 
 <style>
@@ -95,35 +96,32 @@ html{scroll-behavior:auto}
 .js .dt,.js .dt.on{transform:none;transition:none}
 }
 
-.intro{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:100svh;min-height:540px;overflow:hidden;background:var(--bg)}
-.intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:crosshair}
-.intro .in{position:relative;z-index:1;height:100%;padding:20px max(16px,env(safe-area-inset-right,0px)) 22px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
-.intro .top,.intro .bot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;font:500 12px var(--sans)}
-.intro .top{align-items:flex-start}
-.intro .bot{color:var(--mut)}
-.intro h1{margin:0;font:600 clamp(40px,8.6vw,132px)/.96 var(--sans);letter-spacing:-.05em;text-wrap:balance}
-.intro h1 em{font-style:normal;color:#031ff1}
-.intro .kr{margin:20px 0 0;font:500 clamp(16px,1.8vw,24px)/1.45 var(--kr);letter-spacing:-.03em;word-break:keep-all}
-.intro .role{margin:12px 0 0;max-width:48ch;font:400 13px/1.7 var(--kr);color:var(--mut);word-break:keep-all}
-.intro a,.intro button{pointer-events:auto;cursor:pointer}
-.intro a:hover,.intro button:hover{text-decoration:underline;text-underline-offset:3px}
-.intro button{background:none;border:0;padding:6px 0;font:inherit;color:inherit}
-.intro .hint{color:var(--mut)}
-@media(max-width:560px){.intro .role{font-size:12.5px}.intro .bot{flex-wrap:wrap}}
+
+.sp{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:100vh;height:100svh;min-height:480px;overflow:hidden;background:#fff;touch-action:pan-y;--ink:#111;--label:#6b6b63;--tile-bg:#e8e2d4}
+.sp .orbit{position:absolute;inset:0;z-index:1}
+.sp .t{position:absolute;top:0;left:0;width:var(--ts,70px);height:var(--ts,70px);background:var(--tile-bg) center/cover no-repeat;offset-path:var(--path);offset-rotate:auto;opacity:0;will-change:offset-distance,opacity}
+.sp .fade{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:2;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 38%,rgba(255,255,255,.88) 66%,#fff 100%)}
+.sp svg.word{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible}
+.sp svg.word text{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-variation-settings:"opsz" 32;letter-spacing:-.02em;fill:var(--ink)}
+.sp .lb{position:absolute;z-index:3;margin:0;font:400 21px/1 'Geist Mono',ui-monospace,monospace;color:var(--label);white-space:nowrap;pointer-events:none}
+.sp .nav{position:absolute;z-index:4;top:0;left:0;right:0;display:flex;justify-content:space-between;gap:16px;padding:16px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));font:400 12px/1.4 'Geist Mono',ui-monospace,monospace;color:var(--label)}
+.sp .nav span:last-child{white-space:nowrap}.sp .nav span:first-child{min-width:0}
+.sp .nav a,.sp .nav button{background:none;border:0;padding:6px 0;font:inherit;color:inherit;cursor:pointer}
+.sp .nav a:hover,.sp .nav button:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.sp svg.word,.sp .lb{opacity:0;transform:translateY(14px)}
+.sp.ready svg.word,.sp.ready .lb{opacity:1;transform:none;transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1)}
+.sp.ready svg.word{transition-delay:.7s}.sp.ready .lb{transition-delay:.82s}
+@media(prefers-reduced-motion:reduce){.sp svg.word,.sp .lb{opacity:1;transform:none;transition:none!important}}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 
 <script>document.documentElement.classList.add("js")</script>
-<section class="intro" id="intro" aria-label="Intro">
-<canvas aria-hidden="true"></canvas>
-<div class="in">
-<div class="top"><span>Songjoo Choi</span><span class="hint" data-ko="Creative Technologist" data-en="Creative Technologist">Creative Technologist</span></div>
-<div>
-<h1>No two experiences<br>are <em>the same.</em></h1>
-<p class="kr">세상에 같은 경험은 없다.</p>
-<p class="role">사람이 장소를 어떻게 지각하고 느끼는지 관찰해, 공간 속 경험과 감정을 설계하는 크리에이티브 테크놀로지스트. 만드는 일은 AI와 코드로, 마무리는 손으로 다듬습니다.</p>
-</div>
-<div class="bot"><span class="hint" id="introHint">마우스를 움직여 보세요. 같은 점들이 지나간 길마다 다른 모양이 됩니다.</span><span><a href="process.html">Process →</a>&emsp;<button type="button" id="introGo">Work ↓</button></span></div>
-</div>
+<section class="sp" id="sp" aria-label="Songjoo Choi, Creative Technologist">
+<h1 class="vh">Songjoo Choi, Creative Technologist — No two experiences are the same.</h1>
+<div class="orbit" aria-hidden="true"></div><div class="fade" aria-hidden="true"></div>
+<svg class="word" aria-hidden="true"><text id="spw" x="0" y="0">Interactive</text></svg>
+<p class="lb" id="splb" aria-hidden="true">No two experiences are the same.</p>
+<div class="nav"><span>Songjoo Choi · Creative Technologist</span><span><a href="process.html">Process →</a>&emsp;<button type="button" id="spgo">Work ↓</button></span></div>
 </section>
 <div class="pg">
 <main class="col">
@@ -282,24 +280,32 @@ html{scroll-behavior:auto}
 </script>
 
 <script>
-(function(){var s=document.getElementById('intro');if(!s)return;var c=s.querySelector('canvas'),x=c.getContext('2d'),go=document.getElementById('introGo');
-if(matchMedia('(pointer:coarse)').matches){var ih=document.getElementById('introHint');if(ih)ih.textContent='화면을 터치해 보세요. 같은 점들이 닿은 곳마다 다른 모양이 됩니다.'}
-if(go)go.addEventListener('click',function(){var t=document.querySelector('.pg');if(t)t.scrollIntoView({behavior:'smooth'})});
-var rm=matchMedia('(prefers-reduced-motion:reduce)').matches,dots=[],W=0,H=0,G=26,R=150,seed=Math.random()*100,mx=-999,my=-999,lastMove=-9999,vis=true,raf=0,cols=[];
-for(var k=0;k<=8;k++){var f=k/8;cols.push('rgb('+Math.round(207+(3-207)*f)+','+Math.round(207+(31-207)*f)+','+Math.round(212+(241-212)*f)+')')}
-function size(){var d=Math.min(window.devicePixelRatio||1,2);W=s.clientWidth;H=s.clientHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);G=W<600?22:26;var n=Math.ceil(W/G)+1,m=Math.ceil(H/G)+1,ox=(W-(n-1)*G)/2,oy=(H-(m-1)*G)/2;dots=[];for(var j=0;j<m;j++)for(var i=0;i<n;i++)dots.push({hx:ox+i*G,hy:oy+j*G,dx:0,dy:0,vx:0,vy:0,h:0,p:Math.random()*6.283})}
-function draw(now){x.clearRect(0,0,W,H);var idle=now-lastMove>2500;if(idle){mx=W*(.5+.34*Math.sin(now*.0006+seed));my=H*(.5+.3*Math.sin(now*.0009+seed*2))}
-for(var i=0;i<dots.length;i++){var d=dots[i],px=d.hx+d.dx,py=d.hy+d.dy,ax=px-mx,ay=py-my,dist=Math.sqrt(ax*ax+ay*ay);
-if(dist<R&&dist>.01){var f=1-dist/R;f*=f;d.vx+=ax/dist*f*3;d.vy+=ay/dist*f*3;if(f>d.h)d.h=f}
-d.vx+=-d.dx*.07;d.vy+=-d.dy*.07;d.vx*=.8;d.vy*=.8;d.dx+=d.vx;d.dy+=d.vy;d.h*=.993;
-var w=Math.sin(now*.0007+d.p)*.6,r=1.1+d.h*2.8;x.fillStyle=cols[Math.min(8,Math.round(d.h*8))];x.beginPath();x.arc(d.hx+d.dx+w,d.hy+d.dy+w,r,0,6.283);x.fill()}}
-function loop(now){raf=0;if(!vis)return;draw(now);raf=requestAnimationFrame(loop)}
-function start(){if(!raf&&vis&&!rm)raf=requestAnimationFrame(loop)}
-size();if(rm){draw(0)}else start();
-addEventListener('resize',function(){size();if(rm)draw(0)});
-function pm(e){var b=c.getBoundingClientRect();mx=e.clientX-b.left;my=e.clientY-b.top;lastMove=performance.now()}
-s.addEventListener('pointermove',pm);s.addEventListener('pointerdown',pm);
-s.addEventListener('pointerleave',function(){mx=-999;my=-999;lastMove=performance.now()});
-if('IntersectionObserver' in window)new IntersectionObserver(function(en){vis=en[0].isIntersecting;if(vis)start()}).observe(s)})();
+(function(){var sec=document.getElementById('sp');if(!sec)return;
+var N=34,IMG=[0,4,2,6,1,8,3,7,5],rm=matchMedia('(prefers-reduced-motion:reduce)').matches,orbit=sec.querySelector('.orbit'),word=document.getElementById('spw'),lb=document.getElementById('splb'),tiles=[],base=0,push=0,last=0,t0=0,intro=!rm,vis=true,raf=0,lastY=window.scrollY,ready=false;
+var go=document.getElementById('spgo');if(go)go.addEventListener('click',function(){var t=document.querySelector('.pg');if(t)t.scrollIntoView({behavior:'smooth'})});
+for(var i=0;i<N;i++){var d=document.createElement('div');d.className='t';d.style.backgroundImage='url(assets/tiles/t'+(IMG[i%9])+'.jpg)';orbit.appendChild(d);tiles.push(d)}
+function pathD(cx,cy,rx,ry){var A=6*Math.PI,S=48,hh=1/S,out='';function P(t){var a=A*t,f=1-.95*t;return[cx+Math.cos(a)*rx*f,cy+Math.sin(a)*ry*f]}
+function D(t){var a=A*t,f=1-.95*t;return[rx*(-Math.sin(a)*A*f+Math.cos(a)*-.95),ry*(Math.cos(a)*A*f+Math.sin(a)*-.95)]}
+var p0=P(0);out='M'+p0[0].toFixed(2)+' '+p0[1].toFixed(2);for(var k=0;k<S;k++){var ta=k*hh,tb=(k+1)*hh,pa=P(ta),pb=P(tb),da=D(ta),db=D(tb);out+=' C'+(pa[0]+da[0]*hh/3).toFixed(2)+' '+(pa[1]+da[1]*hh/3).toFixed(2)+' '+(pb[0]-db[0]*hh/3).toFixed(2)+' '+(pb[1]-db[1]*hh/3).toFixed(2)+' '+pb[0].toFixed(2)+' '+pb[1].toFixed(2)}return out}
+function layout(){var W=sec.clientWidth,H=sec.clientHeight,phone=W<820&&H>W,s=Math.max(.42,Math.min(W/1440,H/900)),cx,cy,rx,ry,ts,pad,rpad,lbs,lbl,gap;
+if(phone){rx=ry=W*.62;cx=W*.5;cy=H*.42;ts=Math.round(Math.min(W*.115,60));pad=rpad=Math.max(8,W*.02);lbs=12;lbl=Math.max(16,W*.045);gap=12}
+else{rx=ry=470*s;cx=W*.5;cy=H*.44;ts=Math.round(70*s);var k=Math.max(W/1440,.6);pad=12*k;rpad=25*k;lbs=Math.max(12,21*s);lbl=Math.max(16,40*W/1440);gap=Math.max(8,11*s)}
+orbit.style.setProperty('--path','path("'+pathD(cx,cy,rx,ry)+'")');orbit.style.setProperty('--ts',ts+'px');
+var svg=word.parentNode;svg.setAttribute('viewBox','0 0 '+W+' '+H);word.setAttribute('font-size',100);word.setAttribute('x',0);var L=word.getComputedTextLength(),fs=100*(W-pad-rpad)/L;if(!phone)fs=Math.min(fs,H*.5);word.setAttribute('font-size',fs);
+var bb=word.getBBox();word.setAttribute('x',pad-bb.x);var base_y=H+.04*fs;word.setAttribute('y',base_y);
+var cap=base_y-.727*fs;lb.style.fontSize=lbs+'px';lb.style.left=lbl+'px';lb.style.top=(phone?cap-gap-lbs:cap-gap-.8*lbs)+'px'}
+function apply(now){var dt=Math.min(40,now-last);last=now;if(!rm){var step=push*(1-Math.exp(-dt/110));base+=.001*dt+step;push-=step;if(Math.abs(push)<1e-4)push=0}
+var el=now-t0;for(var i=0;i<N;i++){var d=((base+i*100/N)%100+100)%100,o=Math.min(1,d/10,(100-d)/10),sc=1,od=d,z=1+Math.floor(d/10);
+if(intro){var delay=d/100*1100,k=Math.min(1,Math.max(0,(el-delay)/850)),e=Math.sin(k*Math.PI/2);od=Math.max(0,d-2.4*(1-e));o*=e;sc=.85+.15*e}
+var t=tiles[i];t.style.offsetDistance=od+'%';t.style.opacity=o;t.style.zIndex=z;t.style.scale=sc}
+if(intro&&el>1950)intro=false}
+function loop(now){raf=0;if(!vis)return;apply(now);raf=requestAnimationFrame(loop)}
+function start(){if(!raf&&vis&&!rm){last=performance.now();raf=requestAnimationFrame(loop)}}
+function init(){if(ready)return;ready=true;layout();t0=performance.now();last=t0;sec.classList.add('ready');if(rm){intro=false;apply(t0)}else start()}
+var rq=0;addEventListener('resize',function(){if(rq)return;rq=requestAnimationFrame(function(){rq=0;layout();if(rm)apply(performance.now())})});
+addEventListener('scroll',function(){var y=window.scrollY,dy=y-lastY;lastY=y;if(!rm&&vis)push+=dy*.0043},{passive:true});
+if('IntersectionObserver' in window)new IntersectionObserver(function(en){vis=en[0].isIntersecting;if(vis)start()}).observe(sec);
+var done=false;function fire(){if(!done){done=true;init()}}
+if(document.fonts&&document.fonts.load){Promise.all([document.fonts.load('600 100px Inter'),document.fonts.load('400 21px "Geist Mono"')]).then(fire,fire)}else fire();setTimeout(fire,1500)})();
 </script>
 </body></html>
