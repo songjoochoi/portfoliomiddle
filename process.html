@@ -1,0 +1,77 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="claude:viewport-fit-sides" content="cover"><title>제작 프로세스</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#fff;--fg:#111110;--mut:#6d6c66;--line:#e4e4e4;--line-2:#cfcfcf;--card:#f5f5f5;--ink-2:#2e2d2a;--ink-hi:#111110;--dim:#8a8982;--a:#c93a2b;--on-a:#fbfbf9;
+--media:#efefef;--on-media:#111110;--ov:#f6f4ef;--paper:#fcf9fc;--void:#111113;--td:#16171b;--dot:rgba(255,255,255,.55);
+--scrim:rgba(255,255,255,.7);--halo:rgba(255,255,255,0);--halo-room:rgba(255,255,255,0);
+--room:#f2f1ec;--screen:radial-gradient(circle,transparent 0 1px,rgba(255,255,255,.5) 1.7px);
+--sans:'Space Grotesk','Noto Sans KR',system-ui,sans-serif;--kr:'Noto Sans KR','Space Grotesk',system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:13px/1.6 var(--kr);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-decoration:none}a:hover{text-decoration:underline;text-underline-offset:3px}
+.w{max-width:1100px;margin:0 auto;padding-block:20px 80px}
+.top{display:flex;justify-content:space-between;font:500 13px var(--sans);padding:6px 0}
+h1{margin:9vh 0 8px;font:600 clamp(30px,5vw,60px)/1.05 var(--sans);letter-spacing:-.04em}
+.lead{margin:0 0 7vh;max-width:56ch;font:500 clamp(15px,1.5vw,19px)/1.65 var(--kr);letter-spacing:-.03em;word-break:keep-all}
+.sx{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:8px 28px;border-top:1px solid var(--line);padding:26px 0 32px}
+.sx>h2{margin:2px 0 0;font:600 13px var(--kr);color:var(--a)}
+.sx>h2 small{display:block;margin-top:4px;font:400 12px var(--sans);color:var(--mut)}
+ul.b{margin:0;padding:0;list-style:none;max-width:70ch;font-size:15px;line-height:1.7;color:var(--ink-2);word-break:keep-all;overflow-wrap:break-word}
+ul.b li{position:relative;padding-left:14px;margin:0 0 6px}ul.b li:before{content:"";position:absolute;left:2px;top:.78em;width:4px;height:4px;border-radius:50%;background:var(--mut)}
+.tb{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6}.tb th{text-align:left;font:500 12px var(--sans);color:var(--mut);padding:0 12px 8px 0;border-bottom:1px solid var(--line)}
+.tb td{padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top;word-break:keep-all}.tb td:first-child{font-weight:500;white-space:nowrap}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.flow li{border:1px solid var(--line-2);border-radius:2px;padding:14px 14px 16px;display:grid;gap:6px;align-content:start}
+.flow b{font:600 12px var(--sans);color:var(--a)}.flow strong{font:600 15px var(--kr);letter-spacing:-.02em}.flow span{color:var(--mut);font-size:13px;line-height:1.55;word-break:keep-all}
+.flow i{font:500 11px var(--sans);font-style:normal;color:var(--fg);border:1px solid var(--line-2);border-radius:2px;padding:1px 8px;justify-self:start}
+.cs{margin:0 0 30px}.cs:last-child{margin-bottom:0}.cs h3{margin:0 0 8px;font:600 15px var(--kr);letter-spacing:-.02em}
+.im{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 0}.im.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.im figure{margin:0}.im img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--card)}.im.fit img{object-fit:contain;background:#fff;border:1px solid var(--line)}
+.im figcaption{margin-top:6px;color:var(--mut);font-size:12.5px;line-height:1.55;word-break:keep-all}
+@media(max-width:760px){.sx{grid-template-columns:minmax(0,1fr)}.flow{grid-template-columns:minmax(0,1fr)}.im,.im.two{grid-template-columns:minmax(0,1fr)}.tb td:first-child{white-space:normal}}
+</style></head><body><div class="w">
+<div class="top"><a href="index.html">← Back</a><span>Songjoo Choi</span></div>
+<h1>Process</h1>
+<p class="lead">사람의 지각과 행동을 근거로 설계하고, 초안은 AI와 만들고, 마지막은 직접 확인하고 손으로 고칩니다. 이 페이지는 그 과정을 실제 작업을 예로 설명합니다.</p>
+
+<section class="sx"><h2>제작 흐름<small>Workflow</small></h2><div>
+<ol class="flow">
+<li><b>01</b><strong>관찰과 가설</strong><span>설문, 벤치마킹, 페르소나로 문제를 정의</span><i>사람</i></li>
+<li><b>02</b><strong>초안 만들기</strong><span>Midjourney로 장면 이미지와 영상, Claude와 코드·문서 초안</span><i>AI</i></li>
+<li><b>03</b><strong>직접 검증</strong><span>테스트 영상으로 실제 동작과 화면을 확인</span><i>사람</i></li>
+<li><b>04</b><strong>수작업 보정</strong><span>결과 선별과 재생성, 수치 조정, 방향 지시와 검수</span><i>사람</i></li>
+<li><b>05</b><strong>기록</strong><span>결과와 시행착오를 사이트에 남김</span><i>사람</i></li>
+</ol></div></section>
+
+<section class="sx"><h2>지식 역량<small>Knowledge</small></h2><div>
+<table class="tb"><tr><th>역량</th><th>실제로 한 일</th><th>작업에서 쓴 곳</th></tr>
+<tr><td>사람 이해와 조사</td><td>설문 61명(2026.9.3~9.5), 벤치마킹 4개, 페르소나 3종으로 문제를 정의하고, 약점(게임 중 단어를 살펴보기 어려움)은 게임 뒤 단어 정보 화면으로 분리해 대응</td><td>말모이 기획</td></tr>
+<tr><td>인터랙션 구현</td><td>MediaPipe 손 인식 테스트, 화면 모서리 4점 보정, 주먹 쥐기 선택, Unity 손 커서</td><td>말모이 입력</td></tr>
+<tr><td>게임 설계와 Unity(C#)</td><td>게임마다 Manager 스크립트 하나로 규칙을 값으로 관리해 코드 수정 없이 밸런스 조절</td><td>말모이 개발</td></tr>
+<tr><td>웹 · JavaScript</td><td>나무 비주얼 첫 시안, 포트폴리오 사이트의 반응형 인트로와 상세 페이지</td><td>초기 실험, 이 사이트</td></tr>
+<tr><td>TouchDesigner</td><td>음원을 저·중·고음으로 분석하고 GLSL 노드가 반응하는 오디오 반응형 비주얼</td><td>말모이 비주얼</td></tr>
+<tr><td>언어</td><td>JLPT N2, HSK 3급</td><td>일본·중국 중심의 해외 활동 방향</td></tr></table></div></section>
+
+<section class="sx"><h2>AI 활용 방식<small>AI in the workflow</small></h2><div>
+<ul class="b">
+<li>AI를 작품 안에 넣는 것이 아니라 기획, 리서치, 시각화, 코딩, 검증 같은 작업 방식에 쓴다는 기준으로 사용합니다</li>
+<li>시각화: Midjourney로 장면 이미지를 만들고, Midjourney의 영상 기능으로 영상화했습니다 (유기체 정원, 유영하는 생태, 빛의너머, Detroit: Become Human)</li>
+<li>코딩과 문서: 이 포트폴리오 사이트는 Claude와 대화하며 코드와 문서를 만들고, 결과를 직접 확인해 수정 방향을 지시하는 방식으로 제작했습니다</li>
+<li>판단은 사람이 합니다: 주제와 방향, 무엇을 남기고 버릴지, 완성 기준은 직접 정합니다</li>
+</ul></div></section>
+
+<section class="sx"><h2>수작업 보정<small>Hand-finishing</small></h2><div>
+<div class="cs"><h3>1. Midjourney 결과 선별과 재생성</h3>
+<ul class="b"><li>생성된 장면 중 작품 방향에 맞는 것을 고르고, 맞지 않으면 다시 생성해 영상으로 이어갔습니다</li><li>이후 TouchDesigner로 후작업을 하는 단계가 남아 있고, 프롬프트와 시행착오 기록은 다음 개선에서 추가합니다</li></ul>
+<div class="im"><figure><img src="assets/posters/garden.jpg" alt="유기체 정원" loading="lazy"><figcaption>유기체 정원</figcaption></figure><figure><img src="assets/posters/drift.jpg" alt="유영하는 생태" loading="lazy"><figcaption>유영하는 생태</figcaption></figure><figure><img src="assets/posters/beyond.jpg" alt="빛의너머" loading="lazy"><figcaption>빛의너머</figcaption></figure></div></div>
+<div class="cs"><h3>2. Unity 수치와 판정 직접 조정</h3>
+<ul class="b"><li>손을 0.8초 올려 두면 자동 선택되는 문제를 주먹 쥐기 입력으로 바꾸고, 폈다 쥐어야 입력되도록 하고 입력 간격을 0.5초로 맞췄습니다</li><li>목숨 5개, 오답 연출 1.1초, 정답 3연속 시 피버타임 같은 값은 인스펙터에서 직접 조절해 게임 감각을 맞췄습니다</li><li>결과 나무에서 호버와 선택이 반복되는 문제는 한 번에 하나만 선택하게 고쳤습니다</li></ul>
+<div class="im two"><figure><img src="assets/unity-nogame.jpg" alt="Unity 편집기" loading="lazy"><figcaption>Unity 편집기 — 게임 씬과 인스펙터 값</figcaption></figure><figure><img src="assets/posters/process-unity1.jpg" alt="1차 시안 테스트" loading="lazy"><figcaption>1차 시안 Unity 기능 테스트</figcaption></figure></div></div>
+<div class="cs"><h3>3. 캐릭터와 로고 방향 지시와 검수</h3>
+<ul class="b"><li>캐릭터 디자인은 팀 디자이너가 맡고, 저는 방향을 지시하고 결과물을 검수했습니다</li><li>시안1은 나뭇잎을 머리 모양으로 삼아 감정별 색으로 구분했고, 시안2는 사용자에 가까운 사람 형태로 바꿔 비교했습니다</li></ul>
+<div class="im two fit"><figure><img src="assets/process-char.jpg" alt="캐릭터 시안" loading="lazy"><figcaption>희·노·애·락 캐릭터와 모이 첫 시안</figcaption></figure><figure><img src="assets/process-logo.jpg" alt="로고 시안" loading="lazy"><figcaption>로고 시안 검수</figcaption></figure></div></div>
+</div></section>
+
+<section class="sx"><h2>지금의 한계<small>Next</small></h2><div>
+<ul class="b"><li>Midjourney 작업의 프롬프트와 시행착오 기록이 아직 없고, TouchDesigner 후작업도 남아 있습니다</li><li>수작업 보정 사례는 말모이가 가장 구체적이고, 나머지 작업은 기록을 쌓는 중입니다</li><li>앞으로 작업을 시작부터 끝까지 기록해 이 페이지에 사례를 더하겠습니다</li></ul></div></section>
+</div></body></html>
