@@ -77,6 +77,14 @@ html.dt-open{overflow-y:hidden}
 .dt-body .sec.np li{padding-left:0}.dt-body .sec.np li:before{display:none}
 .dt-meta{position:sticky;top:72px;align-self:start}
 @media (max-width:760px){.dt-body .sx{grid-template-columns:minmax(0,1fr)}.dt-meta{position:static}}
+.dt-hero{position:relative;margin:0 0 5vh;aspect-ratio:16/9;max-height:72vh;width:100%;overflow:hidden;background:#000;border-radius:2px;cursor:ew-resize}
+.dt-hero video{width:100%;height:100%;object-fit:cover;display:block}
+.dt-hero .hh{position:absolute;left:0;right:0;bottom:0;padding:clamp(40px,8vw,120px) clamp(16px,3vw,40px) clamp(16px,3vw,32px);background:linear-gradient(transparent,rgba(0,0,0,.62));color:#fff;pointer-events:none}
+.dt-hero .tw{margin:0 0 10px;font:500 clamp(26px,5vw,64px)/1.12 var(--kr);letter-spacing:-.04em;white-space:pre-wrap;word-break:keep-all}
+.dt-hero .tw i{display:inline-block;width:2px;height:1em;background:#fff;vertical-align:middle;margin-left:3px;animation:twb 1s step-end infinite}
+@keyframes twb{50%{opacity:0}}
+.dt-hero small{font:400 12px/1.5 var(--sans);opacity:.8}
+@media(hover:none),(max-width:1023px){.dt-hero{cursor:auto}.dt-hero .hint{display:none}}
 .dt-media{display:grid;gap:clamp(16px,2vw,28px);margin:8vh 0}
 .dt-media .fg{margin:0}
 .dt-media .dm{aspect-ratio:16/9;border-radius:2px;overflow:hidden;background:var(--card)}
@@ -221,6 +229,25 @@ html{scroll-behavior:auto}
         arts=[].slice.call(document.querySelectorAll('article.w')),ids=arts.map(function(a){return a.id}),cur_i=-1,root=document.documentElement;
     function L(a,k){return a.getAttribute('data-'+cur)}
     function lang(e){return e.getAttribute('data-'+cur)||e.textContent}
+    var heroT=null;
+    function heroInit(){
+      clearTimeout(heroT);var el=document.getElementById('dth');if(!el)return;var v=el.querySelector('video'),w=document.getElementById('dtw'),
+        txt={ko:'인간과 기계의\n경계를 바라보다',ja:'人間と機械の\n境界を見つめる',en:'Looking at the line\nbetween human and machine'}[cur],
+        rm=matchMedia('(prefers-reduced-motion:reduce)').matches,k=0;
+      function tick(){if(!document.body.contains(w))return;w.innerHTML=txt.slice(0,k).replace(/</g,'&lt;')+(k<txt.length?'<i></i>':'');if(k<txt.length){k++;heroT=setTimeout(tick,rm?0:42)}}
+      rm?(k=txt.length,tick()):(k=0,heroT=setTimeout(tick,500));
+      if(rm){v.preload='metadata';return}
+      if(innerWidth<1024||!matchMedia('(hover:hover)').matches){v.loop=true;var pp=v.play();if(pp&&pp.catch)pp.catch(function(){});return}
+      var px=null,tt=0,busy=false;
+      v.addEventListener('seeked',function(){busy=false});
+      el.addEventListener('mousemove',function(e){
+        if(px===null){px=e.clientX;return}
+        var d=v.duration;if(!d)return;var dx=e.clientX-px;px=e.clientX;
+        tt=Math.max(0,Math.min(d,tt+dx/el.clientWidth*d*1.2));
+        if(!busy){busy=true;v.currentTime=tt}else{}
+      });
+      el.addEventListener('mouseleave',function(){px=null});
+    }
     function render(i){
       var a=arts[i],d=DT[a.id]||{rows:[]},j=cur==='ja'?1:cur==='en'?4:0,esc=function(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')};
       var h3=a.querySelector('h3').textContent,ko=a.querySelector('.ko'),p=a.querySelector('p'),tags=a.querySelector('.tags');
@@ -229,6 +256,7 @@ html{scroll-behavior:auto}
       var q=cur==='ja'?1:cur==='en'?2:0,sec=(d.secs||(d.sec?[d.sec]:[])).map(function(x){return '<div class="sx"><h4>'+esc(x.t[q]||x.t[0])+'</h4><ul class="sec'+(/^\s*·/.test(x.b[q]||x.b[0])?'':' np')+'">'+esc(x.b[q]||x.b[0]).split('\n').map(function(l){return '<li>'+l.replace(/^\s*·\s*/,'')+'</li>'}).join('')+'</ul></div>'}).join('');
       var nx=arts[(i+1)%arts.length],pv=arts[(i-1+arts.length)%arts.length];
       box.innerHTML='<h2>'+esc(h3)+'</h2><p class="sub">'+lang(ko)+'</p>'
+        +(a.id==='detroit'?'<div class="dt-hero" id="dth"><video muted playsinline preload="auto" src="assets/detroit-scrub.mp4"></video><div class="hh"><h3 class="tw" id="dtw"></h3><small><span class="hint">'+({ko:'마우스를 좌우로 움직여 장면을 넘겨 보세요 · ',ja:'マウスを左右に動かして場面をめくれます · ',en:'Move the mouse left and right to scrub the scene · '}[cur])+'</span>'+({ko:'Midjourney로 생성한 영상',ja:'Midjourneyで生成した映像',en:'Video generated with Midjourney'}[cur])+'</small></div></div>':'')
         +'<div class="dt-g"><dl class="dt-meta">'+rows+'<div><dt>Tags</dt><dd><div class="tags">'+tags.innerHTML+'</div></dd></div></dl>'
         +'<div class="dt-body"><p class="lead">'+lang(p)+'</p>'+sec+'</div></div><div class="dt-media" id="dtm"></div>'
         +'<div class="dt-nav"><button type="button" data-g="'+(i-1+arts.length)%arts.length+'"><small>Previous</small><b>'+esc(pv.querySelector('h3').textContent)+'</b></button><button type="button" data-g="'+(i+1)%arts.length+'"><small>Next</small><b>'+esc(nx.querySelector('h3').textContent)+'</b></button></div>';
@@ -236,6 +264,7 @@ html{scroll-behavior:auto}
       [].forEach.call(src,function(el,ii){var w=document.createElement('div');w.className='dm';var s=el.parentNode;if(s.classList.contains('sl')&&s.getAttribute('style'))w.setAttribute('style',s.getAttribute('style'));
         var c=el.cloneNode(true);if(c.tagName==='VIDEO'){c.removeAttribute('autoplay');c.removeAttribute('muted');c.autoplay=false;c.muted=false;c.controls=true;c.loop=true;c.playsInline=true;c.preload='metadata'}else c.loading='eager';w.appendChild(c);var fg=document.createElement('figure');fg.className='fg';fg.appendChild(w);var cp=(d.caps||[])[ii];if(cp){var fc=document.createElement('figcaption');fc.innerHTML=esc(cp[cur==='ja'?1:cur==='en'?2:0]||cp[0]);fg.appendChild(fc)}m.appendChild(fg)});
       
+      if(a.id==='detroit')heroInit();
       cnt.textContent=n+' / '+String(arts.length).padStart(2,'0');
       box.querySelectorAll('.dt-nav button').forEach(function(b){b.addEventListener('click',function(){render(+b.getAttribute('data-g'));dt.scrollTo({top:0})})});
       cur_i=i;
