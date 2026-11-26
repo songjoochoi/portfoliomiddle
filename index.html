@@ -122,6 +122,18 @@ html{scroll-behavior:auto}
 .sp .mn a,.sp .mn button,.sp .mn summary,.sp .mn h2,.sp .mn .copy{color:inherit;font:inherit}.sp .mn .wl button>span+span,.sp .mn .copy{color:#b9b9b2}
 .sp .mn a:hover,.sp .mn button:hover>span:first-child,.sp .mn summary:hover{color:#111}
 .pg{display:none}
+.sp .mn .wka{display:block;background:none;border:0;padding:3px 0;margin:2px 0 4px;font:inherit;color:inherit;cursor:pointer;text-align:left}.sp .mn .wka:hover{color:#111;text-decoration:underline;text-underline-offset:3px}
+.wk{position:fixed;inset:0;z-index:55;overflow-y:auto;overflow-x:hidden;background:#fff;opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s;font-family:'Inter','Noto Sans JP','Noto Sans SC','Noto Sans KR',system-ui,sans-serif}.wk.on{opacity:1;visibility:visible;transition:opacity .3s}
+.wk-open{overflow-y:hidden}
+.wk-top{display:flex;justify-content:flex-end;gap:24px;padding:16px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));align-items:center;font-weight:500;font-size:15px;line-height:1.5;letter-spacing:-.01em;color:#a2a29b}.wk-top .lgb{display:block;padding:6px 0}.wk-top>span{display:flex}
+.wk-top button{background:none;border:0;padding:6px 0;font:inherit;color:inherit;cursor:pointer}.wk-top button:hover{color:#111}
+.wk-h{margin:clamp(12px,4vh,48px) 0 clamp(28px,6vh,72px);padding:0 max(16px,env(safe-area-inset-left,0px));font:600 clamp(72px,17vw,260px)/.9 'Inter',system-ui,sans-serif;font-variation-settings:"opsz" 32;letter-spacing:-.045em;color:#111}
+.wk-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 16px;margin:0;padding:0 max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px));list-style:none}
+.wk-g button{display:block;width:100%;padding:0;background:none;border:0;text-align:left;font:inherit;color:#111;cursor:pointer}
+.wk-g .im{display:block;overflow:hidden;aspect-ratio:3/2;background:#f2f2f0}.wk-g img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,1,.36,1)}.wk-g button:hover img{transform:scale(1.03)}
+.wk-g .nm{display:flex;justify-content:space-between;gap:16px;margin-top:14px;font:600 clamp(20px,2.3vw,34px)/1.15 'Inter',system-ui,sans-serif;letter-spacing:-.03em}.wk-g .nm i{font:500 15px/1.6 'Inter',system-ui,sans-serif;font-style:normal;color:#a2a29b;letter-spacing:0}
+.wk-g .ct{display:block;margin-top:4px;font-size:15px;color:#8a8982}
+@media(max-width:700px){.wk-g{grid-template-columns:minmax(0,1fr);gap:40px}}
 .sp .nav{align-items:center}.sp .nav>span{display:flex;align-items:center}.sp .nav a,.sp .nav .lgb{display:block;padding:6px 0;line-height:1.5}
 .sf{width:100vw;margin-left:calc(50% - 50vw);padding:18px max(16px,env(safe-area-inset-right,0px)) max(22px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-top:1px solid #ececea;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font:500 15px/1.5 'Inter','Noto Sans KR',system-ui,sans-serif;letter-spacing:-.01em;color:#a2a29b;background:#fff}
 .sf a,.sf button{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}.sf a:hover,.sf button:hover{color:#111}
@@ -143,7 +155,7 @@ html{scroll-behavior:auto}
 <svg class="word" aria-hidden="true"><defs><radialGradient id="spg" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="0"><stop offset="0" stop-color="#fff6b0"/><stop offset=".14" stop-color="#ffd23f"/><stop offset=".32" stop-color="#ff8a3d"/><stop offset=".48" stop-color="#ff5f86"/><stop offset=".66" stop-color="#5b8cff"/><stop offset=".88" stop-color="#111"/><stop offset="1" stop-color="#111"/></radialGradient></defs><text id="spw" x="0" y="0">Interactive</text></svg>
 <div class="nav"><span><a href="process.html">Process</a></span><span data-lang-slot></span></div>
 <main class="col mn">
-<details class="ac" open><summary>Work</summary><ul class="wl">
+<details class="ac" open><summary>Work</summary><button type="button" class="wka">전체 보기</button><ul class="wl">
 <li><button type="button" data-i="0"><span>Malmoi</span></button></li>
 <li><button type="button" data-i="1"><span>Drifting Ecosystem</span></button></li>
 <li><button type="button" data-i="2"><span>Beyond the Light</span></button></li>
@@ -225,6 +237,11 @@ p.addEventListener('pointerleave',function(){tr=0;if(!raf)raf=requestAnimationFr
 
 <div class="dt" id="dt" role="dialog" aria-modal="true" aria-hidden="true"><div class="dt-in"><div class="dt-top"><button type="button" id="dtx"><span data-ko="작업 목록" data-ja="作品一覧" data-en="All works">작업 목록</span></button><span class="cnt" id="dtc"></span><button type="button" id="dtx2">Close</button></div><div id="dtb"></div></div></div>
 
+<div class="wk" id="wk" role="dialog" aria-modal="true" aria-label="Work" aria-hidden="true"><div class="wk-top"><span data-lang-slot></span><button type="button" id="wkx">Close</button></div><h2 class="wk-h">Work</h2><ul class="wk-g"><li><button type="button" data-i="0"><span class="im"><img src="assets/malmoi.jpg" alt="Malmoi" loading="lazy"></span><span class="nm"><span>Malmoi</span><i>01</i></span><span class="ct">인터랙티브 전시</span></button></li><li><button type="button" data-i="1"><span class="im"><img src="assets/posters/drift.jpg" alt="Drifting Ecosystem" loading="lazy"></span><span class="nm"><span>Drifting Ecosystem</span><i>02</i></span><span class="ct">제너레이티브 미디어아트</span></button></li><li><button type="button" data-i="2"><span class="im"><img src="assets/posters/beyond-td.jpg" alt="Beyond the Light" loading="lazy"></span><span class="nm"><span>Beyond the Light</span><i>03</i></span><span class="ct">모션 미디어아트</span></button></li><li><button type="button" data-i="3"><span class="im"><img src="assets/posters/detroit.jpg" alt="Detroit: Become Human" loading="lazy"></span><span class="nm"><span>Detroit: Become Human</span><i>04</i></span><span class="ct">개인 작업</span></button></li></ul></div>
+<script>(function(){var wk=document.getElementById("wk"),r=document.documentElement;function open(){wk.classList.add("on");wk.setAttribute("aria-hidden","false");r.classList.add("wk-open");wk.scrollTop=0}function close(){wk.classList.remove("on");wk.setAttribute("aria-hidden","true");r.classList.remove("wk-open")}
+document.querySelectorAll(".wka").forEach(function(b){b.addEventListener("click",open)});document.getElementById("wkx").addEventListener("click",close);
+wk.querySelectorAll("[data-i]").forEach(function(b){b.addEventListener("click",function(){var m=document.querySelectorAll("article.w")[+b.getAttribute("data-i")].querySelector(".more");if(m)m.click()})});
+addEventListener("keydown",function(e){if(e.key==="Escape"&&wk.classList.contains("on")&&!document.getElementById("dt").classList.contains("on"))close()})})()</script>
 <script src="assets/i18n.js"></script>
 <script>
 (function(){
