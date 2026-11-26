@@ -110,7 +110,7 @@ html{scroll-behavior:auto}
 .sp .t{position:absolute;top:0;left:0;width:var(--ts,70px);height:var(--ts,70px);background:var(--tile-bg) center/cover no-repeat;offset-path:var(--path);offset-rotate:auto;opacity:0;will-change:offset-distance,opacity}
 .sp .fade{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:2;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 38%,rgba(255,255,255,.88) 66%,#fff 100%)}
 .sp svg.word{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible}
-.sp svg.word text{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-variation-settings:"opsz" 32;letter-spacing:-.02em;fill:var(--ink)}
+.sp svg.word text{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-variation-settings:"opsz" 32;letter-spacing:-.02em;fill:url(#spg) #111}
 
 .sg{position:relative;width:100vw;margin-left:calc(50% - 50vw);padding:clamp(2px,.8vw,12px) max(16px,env(safe-area-inset-left,0px)) clamp(48px,10vh,120px);background:#fff}
 .sg p{margin:0;max-width:1400px;font:600 clamp(40px,9.4vw,150px)/1.02 'Inter',system-ui,sans-serif;font-variation-settings:"opsz" 32;letter-spacing:-.04em;color:#111;word-break:keep-all}
@@ -139,7 +139,7 @@ html{scroll-behavior:auto}
 <section class="sp" id="sp" aria-label="Songjoo Choi, Creative Technologist">
 <h1 class="vh">Songjoo Choi, Creative Technologist — No two experiences are the same.</h1>
 <div class="orbit" aria-hidden="true"></div><div class="fade" aria-hidden="true"></div>
-<svg class="word" aria-hidden="true"><text id="spw" x="0" y="0">Interactive</text></svg>
+<svg class="word" aria-hidden="true"><defs><radialGradient id="spg" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="0"><stop offset="0" stop-color="#fff6b0"/><stop offset=".14" stop-color="#ffd23f"/><stop offset=".32" stop-color="#ff8a3d"/><stop offset=".48" stop-color="#ff5f86"/><stop offset=".66" stop-color="#5b8cff"/><stop offset=".88" stop-color="#111"/><stop offset="1" stop-color="#111"/></radialGradient></defs><text id="spw" x="0" y="0">Interactive</text></svg>
 <div class="nav"><span><a href="process.html">Process →</a></span></div>
 <main class="col mn">
 <details class="ac" open><summary>Work</summary><ul class="wl">
@@ -164,6 +164,12 @@ html{scroll-behavior:auto}
 </ul></section>
 </main>
 </section>
+<script>(function(){var sec=document.getElementById('sp'),w=document.getElementById('spw'),g=document.getElementById('spg');if(!sec||!w||!g||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var tx=0,ty=0,cx=0,cy=0,r=0,tr=0,raf=0;
+function tick(t){raf=0;cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;r+=(tr-r)*.12;g.setAttribute('cx',cx);g.setAttribute('cy',cy);g.setAttribute('r',Math.max(r*(1+.1*Math.sin(t/260)),.01));if(tr>0||r>1)raf=requestAnimationFrame(tick);else g.setAttribute('r',.01)}
+sec.addEventListener('pointermove',function(e){var b=sec.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top,bb=w.getBBox();
+if(x>=bb.x&&x<=bb.x+bb.width&&y>=bb.y&&y<=bb.y+bb.height){if(!tr&&r<1){cx=x;cy=y}tx=x;ty=y;tr=parseFloat(w.getAttribute('font-size'))*.85;if(!raf)raf=requestAnimationFrame(tick)}else if(tr){tr=0;if(!raf)raf=requestAnimationFrame(tick)}});
+sec.addEventListener('pointerleave',function(){tr=0;if(!raf)raf=requestAnimationFrame(tick)})})()</script>
 <section class="sg" id="sg" aria-label="No two experiences are the same."><p id="sgp">No two experiences are the same.</p></section>
 <script>(function(){var p=document.getElementById('sgp');if(!p)return;var t=p.textContent.trim().split(' ');p.setAttribute('aria-hidden','true');p.innerHTML=t.map(function(s){return '<span class="w">'+s+'</span>'}).join(' ');var ws=p.querySelectorAll('.w'),rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 function u(){var H=innerHeight,i;for(i=0;i<ws.length;i++){var r=ws[i].getBoundingClientRect();if(rm||r.top<H*.82)ws[i].classList.add('on');else ws[i].classList.remove('on')}}
