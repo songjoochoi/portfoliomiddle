@@ -83,6 +83,7 @@ html.dt-open{overflow-y:hidden}
 .dt-hero .tw{margin:0 0 10px;font:500 clamp(26px,5vw,64px)/1.12 var(--kr);letter-spacing:-.04em;white-space:pre-wrap;word-break:keep-all}
 .dt-hero .tw i{display:inline-block;width:2px;height:1em;background:#fff;vertical-align:middle;margin-left:3px;animation:twb 1s step-end infinite}
 @keyframes twb{50%{opacity:0}}
+.dt-hero .sb{margin:0 0 8px;font:400 clamp(13px,1.5vw,19px)/1.4 var(--kr);letter-spacing:-.02em;opacity:.92}
 .dt-hero small{font:400 12px/1.5 var(--sans);opacity:.8}
 @media(hover:none),(max-width:1023px){.dt-hero{cursor:auto}.dt-hero .hint{display:none}}
 .dt-media{display:grid;gap:clamp(16px,2vw,28px);margin:8vh 0}
@@ -285,7 +286,7 @@ new MutationObserver(function(){if(busy)return;clearTimeout(tm);tm=setTimeout(hl
     var heroT=null;
     function heroInit(){
       clearTimeout(heroT);var el=document.getElementById('dth');if(!el)return;var v=el.querySelector('video'),w=document.getElementById('dtw'),
-        txt={ko:'인간과 기계의\n경계를 바라보다',ja:'人間と機械の\n境界を見つめる',en:'Looking at the line\nbetween human and machine',zh:'注视人类与机器\n之间的边界'}[cur],
+        txt='Detroit: Become Human',
         rm=matchMedia('(prefers-reduced-motion:reduce)').matches,k=0;
       function tick(){if(!document.body.contains(w))return;w.innerHTML=txt.slice(0,k).replace(/</g,'&lt;')+(k<txt.length?'<i></i>':'');if(k<txt.length){k++;heroT=setTimeout(tick,rm?0:42)}}
       rm?(k=txt.length,tick()):(k=0,heroT=setTimeout(tick,500));
@@ -309,7 +310,7 @@ new MutationObserver(function(){if(busy)return;clearTimeout(tm);tm=setTimeout(hl
       var q=0,sec=(d.secs||(d.sec?[d.sec]:[])).map(function(x){return '<div class="sx"><h4>'+esc(x.t[q]||x.t[0])+'</h4><ul class="sec'+(/^\s*·/.test(x.b[q]||x.b[0])?'':' np')+'">'+esc(x.b[q]||x.b[0]).split('\n').map(function(l){return '<li>'+l.replace(/^\s*·\s*/,'')+'</li>'}).join('')+'</ul></div>'}).join('');
       var nx=arts[(i+1)%arts.length],pv=arts[(i-1+arts.length)%arts.length];
       box.innerHTML='<h2>'+esc(h3)+'</h2><p class="sub">'+lang(ko)+'</p>'
-        +(a.id==='detroit'?'<div class="dt-hero" id="dth"><video muted playsinline preload="auto" src="assets/detroit-scrub.mp4"></video><div class="hh"><h3 class="tw" id="dtw"></h3><small><span class="hint">'+'마우스를 좌우로 움직여 장면을 넘겨 보세요 · '+'</span>'+'Midjourney로 생성한 영상'+'</small></div></div>':'')
+        +(a.id==='detroit'?'<div class="dt-hero" id="dth"><video muted playsinline preload="auto" src="assets/detroit-scrub.mp4"></video><div class="hh"><h3 class="tw" id="dtw"></h3><p class="sb">인간과 기계의 경계를 바라보다</p><small><span class="hint">'+'마우스를 좌우로 움직여 장면을 넘겨 보세요 · '+'</span>'+'Midjourney로 생성한 영상'+'</small></div></div>':'')
         +'<div class="dt-g"><dl class="dt-meta">'+rows+'<div><dt>Tags</dt><dd><div class="tags">'+tags.innerHTML+'</div></dd></div></dl>'
         +'<div class="dt-body"><p class="lead">'+lang(p)+'</p>'+sec+'</div></div><div class="dt-media" id="dtm"></div>'
         +'<div class="dt-nav"><button type="button" data-g="'+(i-1+arts.length)%arts.length+'"><small>Previous</small><b>'+esc(pv.querySelector('h3').textContent)+'</b></button><button type="button" data-g="'+(i+1)%arts.length+'"><small>Next</small><b>'+esc(nx.querySelector('h3').textContent)+'</b></button></div>';
