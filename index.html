@@ -310,7 +310,7 @@ new MutationObserver(function(){if(busy)return;clearTimeout(tm);tm=setTimeout(hl
       var q=0,sec=(d.secs||(d.sec?[d.sec]:[])).map(function(x){return '<div class="sx"><h4>'+esc(x.t[q]||x.t[0])+'</h4><ul class="sec'+(/^\s*·/.test(x.b[q]||x.b[0])?'':' np')+'">'+esc(x.b[q]||x.b[0]).split('\n').map(function(l){return '<li>'+l.replace(/^\s*·\s*/,'')+'</li>'}).join('')+'</ul></div>'}).join('');
       var nx=arts[(i+1)%arts.length],pv=arts[(i-1+arts.length)%arts.length];
       box.innerHTML='<h2>'+esc(h3)+'</h2><p class="sub">'+lang(ko)+'</p>'
-        +(a.id==='detroit'?'<div class="dt-hero" id="dth"><video muted playsinline preload="auto" src="assets/detroit-scrub.mp4"></video><div class="hh"><h3 class="tw" id="dtw"></h3><p class="sb">인간과 기계의 경계를 바라보다</p><small><span class="hint">'+'마우스를 좌우로 움직여 장면을 넘겨 보세요 · '+'</span>'+'Midjourney로 생성한 영상'+'</small></div></div>':'')
+        +(a.id==='detroit'?'<div class="dt-hero" id="dth"><video muted playsinline preload="auto" src="assets/detroit-scrub.mp4"></video><div class="hh"><h3 class="tw" id="dtw"></h3><p class="sb">인간과 기계의 경계를 바라보다</p></div></div>':'')
         +'<div class="dt-g"><dl class="dt-meta">'+rows+'<div><dt>Tags</dt><dd><div class="tags">'+tags.innerHTML+'</div></dd></div></dl>'
         +'<div class="dt-body"><p class="lead">'+lang(p)+'</p>'+sec+'</div></div><div class="dt-media" id="dtm"></div>'
         +'<div class="dt-nav"><button type="button" data-g="'+(i-1+arts.length)%arts.length+'"><small>Previous</small><b>'+esc(pv.querySelector('h3').textContent)+'</b></button><button type="button" data-g="'+(i+1)%arts.length+'"><small>Next</small><b>'+esc(nx.querySelector('h3').textContent)+'</b></button></div>';
