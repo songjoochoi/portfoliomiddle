@@ -116,6 +116,7 @@ html{scroll-behavior:auto}
 .sg p{margin:0;max-width:1400px;font:600 clamp(40px,9.4vw,150px)/1.02 'Inter',system-ui,sans-serif;font-variation-settings:"opsz" 32;letter-spacing:-.04em;color:#111;word-break:keep-all}
 .sg .w{display:inline-block;opacity:.14;transform:translateY(.12em);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
 .sg .w.on{opacity:1;transform:none}
+.sg .w{background:radial-gradient(circle var(--r,0px) at var(--x,0px) var(--y,0px),#fff6b0 0,#ffd23f 14%,#ff8a3d 32%,#ff5f86 48%,#5b8cff 66%,#111 88%),linear-gradient(#111,#111);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 @media(prefers-reduced-motion:reduce){.sg .w{opacity:1;transform:none;transition:none}}
 .sp .mn{position:absolute;z-index:4;top:0;left:0;max-width:min(680px,100%);padding:40px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));font:500 15px/1.5 'Inter','Noto Sans KR',system-ui,sans-serif;letter-spacing:-.01em;color:#a2a29b;text-shadow:0 0 6px #fff,0 0 6px #fff,0 0 10px #fff}
 .sp .mn a,.sp .mn button,.sp .mn summary,.sp .mn h2,.sp .mn .copy{color:inherit;font:inherit}.sp .mn .wl button>span+span,.sp .mn .copy{color:#b9b9b2}
@@ -166,7 +167,13 @@ html{scroll-behavior:auto}
 <section class="sg" id="sg" aria-label="No two experiences are the same."><p id="sgp">No two experiences are the same.</p></section>
 <script>(function(){var p=document.getElementById('sgp');if(!p)return;var t=p.textContent.trim().split(' ');p.setAttribute('aria-hidden','true');p.innerHTML=t.map(function(s){return '<span class="w">'+s+'</span>'}).join(' ');var ws=p.querySelectorAll('.w'),rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 function u(){var H=innerHeight,i;for(i=0;i<ws.length;i++){var r=ws[i].getBoundingClientRect();if(rm||r.top<H*.82)ws[i].classList.add('on');else ws[i].classList.remove('on')}}
-addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})()</script>
+addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u();
+if(!rm){var tx=0,ty=0,cx=0,cy=0,r=0,tr=0,raf=0,R=0;
+function tick(t){raf=0;cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;r+=(tr-r)*.12;var k=r*(1+.1*Math.sin(t/260));
+for(var i=0;i<ws.length;i++){var b=ws[i].getBoundingClientRect(),s=ws[i].style;s.setProperty('--x',(cx-b.left)+'px');s.setProperty('--y',(cy-b.top)+'px');s.setProperty('--r',k+'px')}
+if(tr>0||r>1)raf=requestAnimationFrame(tick);else for(i=0;i<ws.length;i++)ws[i].style.setProperty('--r','0px')}
+p.addEventListener('pointermove',function(e){if(!tr&&r<1){cx=e.clientX;cy=e.clientY}tx=e.clientX;ty=e.clientY;R=parseFloat(getComputedStyle(p).fontSize)*1.5;tr=R;if(!raf)raf=requestAnimationFrame(tick)});
+p.addEventListener('pointerleave',function(){tr=0;if(!raf)raf=requestAnimationFrame(tick)})}})()</script>
 
 <footer class="sf"><span>Songjoo Choi · Creative Technologist</span><span><a href="https://github.com/songjoochoi" target="_blank" rel="noopener">GitHub</a>&emsp;<button type="button" id="sft">Back to top ↑</button></span></footer>
 <div class="pg">
