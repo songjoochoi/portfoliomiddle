@@ -130,6 +130,7 @@ html{scroll-behavior:auto}
 .wk-top button{background:none;border:0;padding:6px 0;font:inherit;color:inherit;cursor:pointer}.wk-top button:hover{color:#111}
 .wk-h{margin:clamp(12px,4vh,48px) 0 clamp(28px,6vh,72px);padding:0 max(16px,env(safe-area-inset-left,0px));font:600 clamp(80px,20vw,340px)/.9 'Inter',system-ui,sans-serif;font-variation-settings:"opsz" 32;letter-spacing:-.045em;color:#111}
 .wk-h .w{display:inline-block;padding:.12em .06em .16em 0;margin:-.12em -.06em -.16em 0;background:radial-gradient(circle var(--r,0px) at var(--x,0px) var(--y,0px),#fff6b0 0,#ffd23f 14%,#ff8a3d 32%,#ff5f86 48%,#5b8cff 66%,#111 88%),linear-gradient(#111,#111);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.dt .hl{color:#031ff1}
 .wk-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 16px;margin:0;padding:0 max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px));list-style:none}
 .wk-g button{display:block;width:100%;padding:0;background:none;border:0;text-align:left;font:inherit;color:#111;cursor:pointer}
 .wk-g .im{display:block;overflow:hidden;aspect-ratio:3/2;background:#f2f2f0}.wk-g img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,1,.36,1)}.wk-g button:hover img{transform:scale(1.03)}
@@ -249,6 +250,19 @@ addEventListener("keydown",function(e){if(e.key==="Escape"&&wk.classList.contain
 function tick(t){raf=0;cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;r+=(tr-r)*.12;var k=r*(1+.1*Math.sin(t/260)),b=w.getBoundingClientRect(),s=w.style;s.setProperty('--x',(cx-b.left)+'px');s.setProperty('--y',(cy-b.top)+'px');s.setProperty('--r',k+'px');if(tr>0||r>1)raf=requestAnimationFrame(tick);else s.setProperty('--r','0px')}
 h.addEventListener('pointermove',function(e){if(!tr&&r<1){cx=e.clientX;cy=e.clientY}tx=e.clientX;ty=e.clientY;tr=parseFloat(getComputedStyle(h).fontSize)*.85;if(!raf)raf=requestAnimationFrame(tick)});
 h.addEventListener('pointerleave',function(){tr=0;if(!raf)raf=requestAnimationFrame(tick)})})()</script>
+<script>(function(){var dt=document.getElementById('dt');if(!dt)return;var N=function(s){return[s,s,s,s]};
+var G=[['전체 1등','全体1位','1st place overall','总分第一'],N('68%'),N('85.3%'),N('83.7%'),N('93.4%'),
+['Unity 게임 개발','Unityでのゲーム開発','Unity game development','Unity游戏开发'],['TouchDesigner 비주얼 개발','TouchDesignerのビジュアル開発','TouchDesigner visuals','TouchDesigner视觉开发'],
+['OSC 신호(포트 7000)','OSC信号（ポート7000）','OSC signals (port 7000)','OSC信号（端口7000）'],['말모이 특유의 하프톤 도트','マルモイならではのハーフトーンドット',"Malmoi's signature halftone dots",'Malmoi特有的半色调圆点'],['데모 모드','デモモード','Demo mode','演示模式'],
+['시선을 천천히 붙잡','視線をゆっくりと捉え',['slowly catching their eyes','catch their eyes slowly'],'缓缓抓住他们的视线'],['어느 순간을 봐도 화면이 비어 보이지 않게','どの瞬間を見ても画面が空いて見えないよう','the screen never looks empty at any moment','画面在任何瞬间看起来都不空'],['가까움과 멂','近さと遠さ','near and far','远近'],
+['현실과 비현실의 경계','現実と非現実の境界',['the boundary between the real and the unreal','the boundary between real and unreal'],['现实与非现实边界','现实与非现实的边界']],['빛 속으로 들어가는 감각','光の中に入っていく感覚','the sensation of stepping into the light','走进光中的感觉'],['현실과 비현실이 섞이는 순간','現実と非現実が混ざる瞬間','the real and unreal blend','现实与非现实交融的瞬间'],
+['에러는 노드의 빨간 표시가 아니라 Textport 메시지로 읽어야','エラーはノードの赤い表示ではなくTextportのメッセージで読む',"errors should be read from Textport messages, not the node's red indicator",'错误要看Textport里的信息而不是节点的红色标记'],
+['인간과 안드로이드 사이의 경계','人間とアンドロイドの境界','the boundary between humans and androids',['人类与仿生人之间的边界','人类与仿生人边界']],['12월 초 완성','12月初めの完成','early December','12月初完成'],['인간과 로봇은 어떻게 서로 반응하는가','人間とロボットはどう反応し合うのか','how humans and robots respond to each other','人类与机器人如何相互反应']];
+var X={ko:0,ja:1,en:2,zh:3},busy=0,tm=0;
+function hl(){var l=X[(window.I18N&&I18N.lang)||'ko'];if(l==null)return;busy=1;var T=[].slice.call(dt.querySelectorAll('.dt-meta dd,.lead,.sx li'));
+G.forEach(function(g){var ps=[].concat(g[l]);ps.forEach(function(ph){T.forEach(function(el){var w=document.createTreeWalker(el,4),n,a=[];while(n=w.nextNode())if(!n.parentNode.closest('.hl')&&n.nodeValue.indexOf(ph)>-1)a.push(n);
+a.forEach(function(n){var i;while((i=n.nodeValue.indexOf(ph))>-1){var m=n.splitText(i);n=m.splitText(ph.length);var s=document.createElement('span');s.className='hl';m.parentNode.insertBefore(s,m);s.appendChild(m)}})})})});busy=0}
+new MutationObserver(function(){if(busy)return;clearTimeout(tm);tm=setTimeout(hl,0)}).observe(dt,{childList:true,subtree:true,characterData:true})})()</script>
 <script src="assets/i18n.js"></script>
 <script>
 (function(){
