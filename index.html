@@ -111,6 +111,12 @@ html{scroll-behavior:auto}
 .sp .fade{position:absolute;left:0;right:0;bottom:0;height:46%;z-index:2;pointer-events:none;background:linear-gradient(to bottom,rgba(255,255,255,0) 0%,rgba(255,255,255,.55) 38%,rgba(255,255,255,.88) 66%,#fff 100%)}
 .sp svg.word{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;overflow:visible}
 .sp svg.word text{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-variation-settings:"opsz" 32;letter-spacing:-.02em;fill:var(--ink)}
+
+.sg{position:relative;width:100vw;margin-left:calc(50% - 50vw);padding:clamp(72px,16vh,180px) max(16px,env(safe-area-inset-left,0px)) clamp(72px,16vh,180px);background:#fff}
+.sg p{margin:0;max-width:1400px;font:600 clamp(40px,9.4vw,150px)/1.02 'Inter',system-ui,sans-serif;font-variation-settings:"opsz" 32;letter-spacing:-.04em;color:#111;word-break:keep-all}
+.sg .w{display:inline-block;opacity:.14;transform:translateY(.12em);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
+.sg .w.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.sg .w{opacity:1;transform:none;transition:none}}
 .sp .nav{position:absolute;z-index:4;top:0;left:0;right:0;display:flex;justify-content:space-between;gap:16px;padding:16px max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));font:400 12px/1.4 'Geist Mono',ui-monospace,monospace;color:var(--label)}
 .sp .nav span:last-child{white-space:nowrap}.sp .nav span:first-child{min-width:0}
 .sp .nav a,.sp .nav button{background:none;border:0;padding:6px 0;font:inherit;color:inherit;cursor:pointer}
@@ -128,6 +134,11 @@ html{scroll-behavior:auto}
 <svg class="word" aria-hidden="true"><text id="spw" x="0" y="0">Interactive</text></svg>
 <div class="nav"><span>Songjoo Choi · Creative Technologist</span><span><a href="process.html">Process →</a>&emsp;<button type="button" id="spgo">Work ↓</button></span></div>
 </section>
+<section class="sg" id="sg" aria-label="No two experiences are the same."><p id="sgp">No two experiences are the same.</p></section>
+<script>(function(){var p=document.getElementById('sgp');if(!p)return;var t=p.textContent.trim().split(' ');p.setAttribute('aria-hidden','true');p.innerHTML=t.map(function(s){return '<span class="w">'+s+'</span>'}).join(' ');var ws=p.querySelectorAll('.w'),rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function u(){var H=innerHeight,i;for(i=0;i<ws.length;i++){var r=ws[i].getBoundingClientRect();if(rm||r.top<H*.82)ws[i].classList.add('on');else ws[i].classList.remove('on')}}
+addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})()</script>
+
 <div class="pg">
 <main class="col">
 <details class="ac" open><summary>Work</summary><ul class="wl">
@@ -307,7 +318,7 @@ if(phone){rx=ry=W*.62;cx=W*.5;cy=H*.42;ts=Math.round(Math.min(W*.115,60));pad=rp
 else{rx=ry=470*s;cx=W*.5;cy=H*.44;ts=Math.round(70*s);var k=Math.max(W/1440,.6);pad=12*k;rpad=25*k;lbs=Math.max(12,21*s);lbl=Math.max(16,40*W/1440);gap=Math.max(8,11*s)}
 orbit.style.setProperty('--path','path("'+pathD(cx,cy,rx,ry)+'")');orbit.style.setProperty('--ts',ts+'px');
 var svg=word.parentNode;svg.setAttribute('viewBox','0 0 '+W+' '+H);word.setAttribute('font-size',100);word.setAttribute('x',0);var L=word.getComputedTextLength(),fs=100*(W-pad-rpad)/L;if(!phone)fs=Math.min(fs,H*.5);word.setAttribute('font-size',fs);
-var bb=word.getBBox();word.setAttribute('x',pad-bb.x);var base_y=H+.04*fs;word.setAttribute('y',base_y);
+var bb=word.getBBox();word.setAttribute('x',pad-bb.x);var base_y=H-.045*fs;word.setAttribute('y',base_y);
 var cap=base_y-.727*fs}
 function apply(now){var dt=Math.min(40,now-last);last=now;if(!rm){var step=push*(1-Math.exp(-dt/110));base+=.001*dt+step;push-=step;if(Math.abs(push)<1e-4)push=0}
 var el=now-t0;for(var i=0;i<N;i++){var d=((base+i*100/N)%100+100)%100,o=Math.min(1,d/10,(100-d)/10),sc=1,od=d,z=1+Math.floor(d/10);
